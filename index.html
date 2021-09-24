@@ -21,9 +21,9 @@
   </script>
 
   <meta property="og:type" content="website">
-<meta property="og:title" content="Shineyoki的博客">
+<meta property="og:title" content="成长历程1996">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Shineyoki的博客">
+<meta property="og:site_name" content="成长历程1996">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Song">
 <meta name="twitter:card" content="summary">
@@ -41,7 +41,7 @@
   };
 </script>
 
-  <title>Shineyoki的博客</title>
+  <title>成长历程1996</title>
   
 
 
@@ -92,7 +92,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Shineyoki的博客</h1>
+      <h1 class="site-title">成长历程1996</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -145,6 +145,114 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/24/Flutter%E4%B9%8BDart%E8%AF%AD%E8%A8%80%E7%89%B9%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Song">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="成长历程1996">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/24/Flutter%E4%B9%8BDart%E8%AF%AD%E8%A8%80%E7%89%B9%E7%82%B9/" class="post-title-link" itemprop="url">Flutter之Dart语言特点</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-09-24 17:22:42 / Modified: 18:04:24" itemprop="dateCreated datePublished" datetime="2021-09-24T17:22:42+08:00">2021-09-24</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="一、JIT与AOT"><a href="#一、JIT与AOT" class="headerlink" title="一、JIT与AOT"></a>一、JIT与AOT</h1><blockquote>
+<p>Dart是少数同时支持JIT(即时编译)和AOT(运行期编译)的语言之一，这使Dart具有运行速度快、执行性能好的特点</p>
+</blockquote>
+<p>JIT：即运行时即时编译，在开发周期中使用，可以动态下发和执行代码，开发测试效率高，但运行速度和执行性能则会因为运行时即时编译受影响(代表语言JS、Python)</p>
+<p>AOT：即提前编译，可以支持生成被直接执行的二进制代码，运行速度快、执行性能表现好，但每次执行前都需要提前编译，开发测试效率底(代表语言C、C++)</p>
+<h1 id="二、内存分配与垃圾回收"><a href="#二、内存分配与垃圾回收" class="headerlink" title="二、内存分配与垃圾回收"></a>二、内存分配与垃圾回收</h1><ul>
+<li>内存分配策略</li>
+</ul>
+<blockquote>
+<p>Dart VM的内存分配策略为创建对象时只需在堆上移动指针，内存增长始终线性，省掉了查找可用内存的过程</p>
+</blockquote>
+<blockquote>
+<p>Dart中使用Isolate实现并发。Isolate类似于线程但不共享内存，是一个独立运行的worker。这样使得Dart的isolates拥有自己的私有堆，每个isolate的垃圾回收事件不影响其他isolates的性能，所以isolates可以便面UI出现卡顿以及很好的进行频繁的回收操作</p>
+</blockquote>
+<ul>
+<li>垃圾回收机制</li>
+</ul>
+<blockquote>
+<p>Dart的垃圾回收机制采用了分代垃圾回收策略，新生代在回收内存时采用“半空间”机制，触发垃圾回收时，Dart会将当前半空间中的“活跃”对象拷贝到备用空间，然后整体释放当前空间内所有内存。回收过程中，Dart只需操作少量的“活跃”对象，没有引用的的大量“死亡”对象则被忽略，这样的回收机制很适合Flutter框架中大量Widget销毁重建的场景。</p>
+</blockquote>
+<blockquote>
+<p>Dart的垃圾回收分代为“新生代”和“老生代”。</p>
+</blockquote>
+<p><img src="https://shineyoki.oss-cn-beijing.aliyuncs.com/dart%E8%AF%AD%E8%A8%80%E7%89%B9%E7%82%B9/3613947-057e860fbcfe8904.webp" alt="3613947-057e860fbcfe8904.webp"></p>
+<p>Dart还专门设计了调度器(在引擎中hook)，当检测到空闲并没有用户交互时进行垃圾回收操作</p>
+<p><img src="https://shineyoki.oss-cn-beijing.aliyuncs.com/dart%E8%AF%AD%E8%A8%80%E7%89%B9%E7%82%B9/3613947-0b6111383b3ff3e7.webp" alt="3613947-0b6111383b3ff3e7.webp"></p>
+<p>新生代：</p>
+<ol>
+<li><p>Dart对象分配用的是bump指针方式(在内存比较规整的情况下，虚拟机会找到当前内存分配的指针，然后在紧接着的一块内存中为这个对象分配相应的区域)，相对于malloc(申请一段适当大小的内存空间，在程序运行过程中，堆内存从低地址向高低之连续分配，随着内存释放，会出现不连续的空闲区域)效率要高得多</p>
+</li>
+<li><p>新对象被分配到连续、可用的内存空间，此区域包含两部分：活跃区与非活跃区，新对象在创建时被分配到活跃区。一旦填充完毕，仍活跃的对象被移动至非活跃区，不再活跃的对象被清理掉，然后非活跃区变为活跃区，活跃区变为非活跃区，以此循环。</p>
+<p> <img src="https://shineyoki.oss-cn-beijing.aliyuncs.com/dart%E8%AF%AD%E8%A8%80%E7%89%B9%E7%82%B9/3613947-2767c54f187cfaa7.webp" alt="3613947-2767c54f187cfaa7.webp"></p>
+<p> 确定Object是存活还是死亡，垃圾回收从根对象开始检测，将有引用的Object(存活的)移动至非活动状态，直到所有存活的Object都被移动，死亡的Object则被留下，此方式采用了<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cheney's_algorithm">cheney算法</a>：</p>
+<p> <img src="https://shineyoki.oss-cn-beijing.aliyuncs.com/dart%E8%AF%AD%E8%A8%80%E7%89%B9%E7%82%B9/3613947-e9d9cd5f1f34d4f9.webp" alt="3613947-e9d9cd5f1f34d4f9.webp"></p>
+<p> 注意：新生代阶段主要清理一些寿命较短的对象，如StatelessWidget。当其处于阻塞时，它的清理速度远快于老生代的mark、sweep方式，并且结合调度，从而性能影响非常底。</p>
+</li>
+</ol>
+<p>老生代：</p>
+<p>在新生代阶段未被回收的对象，将会由老生代收集器管理新的内存空间：mark-sweep。</p>
+<p>在老生代收集器的管理分为两个阶段：</p>
+<ol>
+<li>遍历对象图，然后标记在使用的对象</li>
+<li>扫描整个内存，并且回收所有未标记的对象</li>
+</ol>
+<p>注意：标记和回收都会阻塞，但是由于短暂的对象在新生代阶段已被处理，并且配合调度器，所以性能影响非常低。</p>
+<p>调度器：</p>
+<p>在Flutter引擎中，为了最小化垃圾收集对应用程序和UI性能的影响，与垃圾回收提供了hook，当引擎监测到应用程序处于空闲状态(无用户交互)，会发出信号，为垃圾回收提供运行其回收阶段而不影响性能的机会。并且垃圾回收器可以在这些空闲时间进行内存压缩，从而减少内存碎片来优化内存。</p>
+<h1 id="三、无需单独的声明式布局语言"><a href="#三、无需单独的声明式布局语言" class="headerlink" title="三、无需单独的声明式布局语言"></a>三、无需单独的声明式布局语言</h1><blockquote>
+<p>Flutter可以通过Dart编译定义，并不需要类似JSX或XML的声明式布局语言，易于阅读和可视化，开发中更不需要可视化界面构建，因为热重载可以让我们在手机上立即看到效果。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/02/%E5%88%9B%E5%BB%BAFlutter%E6%8F%92%E4%BB%B6package/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -154,7 +262,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shineyoki的博客">
+      <meta itemprop="name" content="成长历程1996">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -282,7 +390,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
