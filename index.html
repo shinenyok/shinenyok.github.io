@@ -145,6 +145,129 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/08/Flutter%20%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%8D%87%E9%99%8D%E7%BA%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Song">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="成长历程1996">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/08/Flutter%20%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%8D%87%E9%99%8D%E7%BA%A7/" class="post-title-link" itemprop="url">Flutter 安装以及升降级</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-12-08 18:00:00 / Modified: 18:01:58" itemprop="dateCreated datePublished" datetime="2021-12-08T18:00:00+08:00">2021-12-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Flutter-安装"><a href="#Flutter-安装" class="headerlink" title="Flutter 安装"></a>Flutter 安装</h1><h2 id="下载Flutter-SDK的几种方式："><a href="#下载Flutter-SDK的几种方式：" class="headerlink" title="下载Flutter SDK的几种方式："></a><strong>下载Flutter SDK的几种方式：</strong></h2><ol>
+<li>打开<a target="_blank" rel="noopener" href="https://docs.flutter.dev/development/tools/sdk/releases"><code>Flutter官方网站</code></a>，选择最新稳定的Flutter Stable版本，解压至本地存放flutter工具包的目录下</li>
+<li>终端使用git下载 进入目标文件夹后git clone 如 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd Documents/ </span><br><span class="line">     git clone -b stable [https:<span class="comment">//github.com/flutter/flutter.git](https://github.com/flutter/flutter.git)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>使用Git客户端如SourceTree、CornerStone下载flutter至本地，切换至stable分支</li>
+</ol>
+<h2 id="配置Flutter环境变量"><a href="#配置Flutter环境变量" class="headerlink" title="配置Flutter环境变量"></a><strong>配置Flutter环境变量</strong></h2><h3 id="Windows配置"><a href="#Windows配置" class="headerlink" title="Windows配置"></a>Windows配置</h3><blockquote>
+<p>配置步骤如下</p>
+<ul>
+<li>打开 “*<code>控制面板&gt;用户帐户&gt;用户帐户&gt;更改我的环境变量</code>*”</li>
+<li>在“用户变量”下检查是否有名为“Path”的条目</li>
+<li>如果该条目存在, 追加 <em>flutter\bin</em>的全路径，使用 ; 作为分隔符.</li>
+<li>如果条目不存在,创建一个新用户变量Path，然后将<em>flutter\bin</em>的全路径作为它的值.在“用户变量”下检查是否有”PUB_HOSTED_URL””FLUTTER_STORAGE_BASE_URL”的条目，如果没有，也添加它们 。  <aside>
+  💡 `PUB_HOSTED_URL`值为`[https://pub.flutter-io.cn](https://pub.flutter-io.cn)`
+  
+  <code>FLUTTER_STORAGE_BASE_URL</code>值为<code>[https://storage.flutter-io.cn](https://storage.flutter-io.cn)</code>  </aside>
+  </li>
+<li>重启Windows以应用此更改。</li>
+</ul>
+</blockquote>
+<h3 id="Mac、Linux配置"><a href="#Mac、Linux配置" class="headerlink" title="Mac、Linux配置"></a>Mac、Linux配置</h3><ul>
+<li>打开(或创建).bash_profile</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch *$HOME/.bash_profile</span><br><span class="line">或者</span><br><span class="line">open $HOME/.bash_profile*</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在.bash_profile文件中添加路径，如</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> FLUTTER_HOME=$HOME/flutter</span><br><span class="line"><span class="keyword">export</span> PATH=$PATH:$FLUTTER_HOME/bin</span><br><span class="line"><span class="keyword">export</span> PATH=$PATH:$FLUTTER_HOME/bin/cache/dart-sdk/bin</span><br><span class="line"><span class="keyword">export</span> FLUTTER_STORAGE_BASE_URL=https:<span class="comment">//storage.flutter-io.cn</span></span><br><span class="line"><span class="keyword">export</span> PUB_HOSTED_URL=https:<span class="comment">//pub.flutter-io.cn</span></span><br></pre></td></tr></table></figure>
+
+<p>保存后运行以下命令来刷新当前终端窗口 </p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source $HOME/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果终端是zsh，终端启动时 ~/.bash_profile 将不会被加载，解决办法就是修改 ～/.zshrc ，在其中添加：source ～/.bash_profile</p>
+</blockquote>
+<aside>
+💡 echo $PATH可以验证“flutter/bin”是否已在PATH中
+
+<p>安装Xcode 9.0或更新版本通过苹果应用商店配置Xcode命令行工具以使用新安装的Xcode版本</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*sudo xcode-select --<span class="keyword">switch</span> /Applications/Xcode.app/Contents/Develope*r</span><br></pre></td></tr></table></figure>
+
+<p>对于大多数情况，当您想要使用最新版本的Xcode时，这是正确的路径。如果您需要使用不同的版本，请指定相应路径。</p>
+<p>确保Xcode许可协议是通过打开一次Xcode或通过命令<code>*sudo xcodebuild -license*</code>同意过了.    终端运行flutter doctor</p>
+</aside>
+
+<h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><p>AndroidStudio</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://developer.android.com/studio/index.html">https://developer.android.com/studio/index.html</a></p>
+<ul>
+<li>启动Android Studio</li>
+<li>执行“Android Studio安装向导”。这将安装最新的Android SDK、Android SDK平台工具和Android SDK构建工具，这些是用Flutter进行Android开发所需要的。</li>
+<li>打开AndroidStudio偏好设置(<em>macOS：<code>Preferences&gt;Plugins</code>，Windows：<code>File&gt;Settings&gt;Plugins</code></em>),点击plugins下载flutter以及dart依赖包，重启后生效。</li>
+<li>终端运行flutter doctor。</li>
+</ul>
+<h1 id="Flutter升降级"><a href="#Flutter升降级" class="headerlink" title="Flutter升降级"></a>Flutter升降级</h1><ul>
+<li>查看flutter当前版本  <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter —version</span><br></pre></td></tr></table></figure>
+</li>
+<li>Flutter分支——master、dev、beta、stable  <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter channel</span><br></pre></td></tr></table></figure>
+</li>
+<li>Flutter切换分支  <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter channel stable</span><br></pre></td></tr></table></figure>
+</li>
+<li>Flutter升级至最新版本  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#切换至stable分支</span><br><span class="line">flutter channel stable</span><br><span class="line">#版本升级</span><br><span class="line">flutter upgrade</span><br></pre></td></tr></table></figure>
+</li>
+<li>Flutter降级至指定版本，如  <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#切换至stable分支</span><br><span class="line">flutter channel stable</span><br><span class="line">#降级</span><br><span class="line">flutter downgrade v1<span class="number">.22</span><span class="number">.6</span> #git checkout <span class="number">1.22</span><span class="number">.6</span> or git reset —hard <span class="number">1.22</span><span class="number">.6</span></span><br><span class="line">#删除工具链缓存（可选）</span><br><span class="line">rm -rf bin/cache</span><br><span class="line">#重新拉取工具链</span><br><span class="line">flutter precache #or flutter doctor</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/08/Flutter%E4%B9%8Bwidget%E6%A6%82%E8%A7%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -668,7 +791,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
