@@ -145,6 +145,174 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/21/iOS%20KVC%E7%9A%84%E4%BD%BF%E7%94%A8%E3%80%81%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86%20/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Song">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="成长历程1996">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/21/iOS%20KVC%E7%9A%84%E4%BD%BF%E7%94%A8%E3%80%81%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86%20/" class="post-title-link" itemprop="url">iOS中KVC的使用以及原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-12-21 14:00:00 / Modified: 18:02:10" itemprop="dateCreated datePublished" datetime="2021-12-21T14:00:00+08:00">2021-12-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="KVC定义"><a href="#KVC定义" class="headerlink" title="KVC定义"></a>KVC定义</h2><p><strong>KVC:即key-value-coding,键值编码。</strong></p>
+<h2 id="KVC的使用"><a href="#KVC的使用" class="headerlink" title="KVC的使用"></a>KVC的使用</h2><ul>
+<li>通过键值路径可为对象的属性进行赋值，也可以设置对象的私有属性。  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Person *person = [Person alloc] init];</span><br><span class="line">[person setValue:<span class="string">@&quot;yomi&quot;</span> forKey:<span class="string">@&quot;name&quot;</span>];</span><br><span class="line"><span class="comment">// 如果对象的某一属性也是对象</span></span><br><span class="line">[person setValue:@<span class="number">1</span> forKeyPath:<span class="string">@&quot;_id&quot;</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li>通过键值路径获取对象某一属性的值，也可以获取私有属性。  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *name = [person valueForKey:<span class="string">@&quot;name&quot;</span>];</span><br><span class="line"><span class="comment">// 也可以通过kvc获的_id</span></span><br><span class="line"><span class="built_in">NSNumber</span> *p_i = [person valueForKeyPath:<span class="string">@&quot;_id&quot;</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li>通过KVC获取集合中的元素个数、最大值、最小值、平均值以及求和。⚠️注意:通过KVC来获取集合中元素的个数时应当使用<code>@&quot;@count&quot;</code>  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Person *p1 = [[Person alloc] init];</span><br><span class="line">p1.age = <span class="number">30</span>;</span><br><span class="line">Person *p2 = [[Person alloc] init];</span><br><span class="line">p2.age = <span class="number">50</span>;</span><br><span class="line">Person *p3 = [[Person alloc] init];</span><br><span class="line">p3.age = <span class="number">80</span>;</span><br><span class="line"><span class="built_in">NSArray</span> *arr = [<span class="built_in">NSArray</span> arrayWithObjects: p1, p2, p3, <span class="literal">nil</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@&quot;\narr.count:%@\nmaxAge:%@\nminAg:%@\navgAge:%@\nsumAge:%@&quot;</span>,</span><br><span class="line">            [arr valueForKey:<span class="string">@&quot;@count&quot;</span>], [arr valueForKeyPath:<span class="string">@&quot;@max.age&quot;</span>],</span><br><span class="line">            [arr valueForKeyPath:<span class="string">@&quot;@min.age&quot;</span>], [arr valueForKeyPath:<span class="string">@&quot;@avg.age&quot;</span>],</span><br><span class="line">            [arr valueForKeyPath:<span class="string">@&quot;@sum.age&quot;</span>]);</span><br></pre></td></tr></table></figure>
+</li>
+<li>通过kvc赋值模型  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDictionary</span> *dict = @&#123;<span class="string">@&quot;id&quot;</span>:@(<span class="number">10</span>), <span class="string">@&quot;name&quot;</span>:<span class="string">@&quot;ver&quot;</span>, <span class="string">@&quot;age&quot;</span>:@<span class="number">90</span>&#125;;</span><br><span class="line">Person *person = [[Person alloc] init];</span><br><span class="line">[person setValuesForKeysWithDictionary:dict];    </span><br></pre></td></tr></table></figure>
+</li>
+<li>完整测试代码如下：  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  ViewController.m</span></span><br><span class="line"><span class="comment">//  kvoTest</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by Admin on 2021/12/7.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#import <span class="meta-string">&quot;ViewController.h&quot;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;objc/message.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span>:<span class="title">NSObject</span></span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSNumber</span> *_<span class="keyword">id</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="keyword">int</span> age;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>) <span class="built_in">NSString</span> *name;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="keyword">int</span> p_id;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Person</span></span></span><br><span class="line"></span><br><span class="line">+ (<span class="keyword">instancetype</span>)personWithDict:(<span class="built_in">NSDictionary</span> *)dict &#123;</span><br><span class="line">    Person *person = [[Person alloc] init];</span><br><span class="line">    [person setValuesForKeysWithDictionary:dict];</span><br><span class="line">    <span class="keyword">return</span> person;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)print&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;id:%@&quot;</span>,_<span class="keyword">id</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Person类中找不到key(此时找不到id)对应的属性时，调用此方法</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forUndefinedKey:(<span class="built_in">NSString</span> *)key &#123;</span><br><span class="line">    <span class="keyword">if</span> ([key isEqualToString:<span class="string">@&quot;id&quot;</span>]) &#123;</span><br><span class="line">        <span class="keyword">self</span>.p_id = [value intValue];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;Person找不到%@对应的属性&quot;</span>, key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    Person *p = [[Person alloc] init];</span><br><span class="line">    [p setValue:<span class="string">@&quot;ddd&quot;</span> forKeyPath:<span class="string">@&quot;name&quot;</span>];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;name:%@&quot;</span>,p.name);</span><br><span class="line">    p.age = <span class="number">40</span>;</span><br><span class="line">    [p setValue:@<span class="number">1</span> forKeyPath:<span class="string">@&quot;_id&quot;</span>];</span><br><span class="line">    [p print];</span><br><span class="line"></span><br><span class="line">    Person *p1 = [[Person alloc] init];</span><br><span class="line">    p1.age = <span class="number">30</span>;</span><br><span class="line">    Person *p2 = [[Person alloc] init];</span><br><span class="line">    p2.age = <span class="number">50</span>;</span><br><span class="line">    Person *p3 = [[Person alloc] init];</span><br><span class="line">    p3.age = <span class="number">80</span>;</span><br><span class="line">    <span class="built_in">NSArray</span> *arr = [<span class="built_in">NSArray</span> arrayWithObjects: p, p1, p2, p3, <span class="literal">nil</span>];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;\narr.count:%@\nmaxAge:%@\nminAg:%@\navgAge:%@\nsumAge:%@&quot;</span>,</span><br><span class="line">                [arr valueForKey:<span class="string">@&quot;@count&quot;</span>], [arr valueForKeyPath:<span class="string">@&quot;@max.age&quot;</span>],</span><br><span class="line">                [arr valueForKeyPath:<span class="string">@&quot;@min.age&quot;</span>], [arr valueForKeyPath:<span class="string">@&quot;@avg.age&quot;</span>],</span><br><span class="line">                [arr valueForKeyPath:<span class="string">@&quot;@sum.age&quot;</span>]);</span><br><span class="line">    <span class="built_in">NSDictionary</span> *dict = @&#123;<span class="string">@&quot;id&quot;</span>:@(<span class="number">10</span>), <span class="string">@&quot;name&quot;</span>:<span class="string">@&quot;ver&quot;</span>, <span class="string">@&quot;age&quot;</span>:@<span class="number">90</span>&#125;;</span><br><span class="line">    Person *p5 = [Person personWithDict:dict];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;name:%@,id:%d,age:%d&quot;</span>,p5.name,p5.p_id,p5.age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="KVC的原理"><a href="#KVC的原理" class="headerlink" title="KVC的原理"></a>KVC的原理</h2><aside>
+💡 OC中一个属性对应有四个成员变量，并且他们的优先级依次为:`_key`>`_isKey`>`key`>`isKey`
+
+</aside>
+
+<h3 id="KVC设值原理为，当调用setValue：属性值-forKey：-”name“的代码时，底层的执行机制如下："><a href="#KVC设值原理为，当调用setValue：属性值-forKey：-”name“的代码时，底层的执行机制如下：" class="headerlink" title="KVC设值原理为，当调用setValue：属性值 forKey：@”name“的代码时，底层的执行机制如下："></a>KVC设值原理为，当调用<code>setValue：属性值 forKey：@”name“</code>的代码时，底层的执行机制如下：</h3><ul>
+<li>程序优先调用set<Key>:属性值方法，代码通过setter方法完成设置。注意，这里的<key>是指成员变量名，首字母大小写要符合KVC的命名规则，下同</li>
+<li>如果没有找到<code>setName：</code>方法，KVC机制会检查<code>+ (BOOL)accessInstanceVariablesDirectly</code>方法有没有返回YES，默认该方法会返回YES，如果你重写了该方法让其返回NO的话，那么在这一步KVC会执行<code>setValue：forUndefinedKey：</code>方法，不过一般开发者不会这么做。所以KVC机制会搜索该类里面有没有名为<code>_&lt;key&gt;</code>的成员变量，无论该变量是在类接口处定义，还是在类实现处定义，也无论用了什么样的访问修饰符，只在存在以<code>_&lt;key&gt;</code>命名的变量，KVC都可以对该成员变量赋值</li>
+<li>如果该类即没有<code>set&lt;key&gt;：</code>方法，也没有<code>_&lt;key&gt;</code>成员变量，KVC机制会搜索<code>_is&lt;Key&gt;</code>的成员变量</li>
+<li>和上面一样，如果该类即没有<code>set&lt;Key&gt;：</code>方法，也没有<code>_&lt;key&gt;</code>和<code>_is&lt;Key&gt;</code>成员变量，KVC机制再会继续搜索<code>&lt;key&gt;</code>和<code>is&lt;Key&gt;</code>的成员变量。再给它们赋值</li>
+<li>如果上面列出的方法或者成员变量都不存在，系统将会执行该对象的<code>setValue：forUndefinedKey：</code>方法，默认是抛出异常</li>
+</ul>
+<h3 id="KVC取值原理为，当调用valueForKey：-”name“的代码时，KVC对key的搜索方式不同于setValue：属性值-forKey：-”name“，其搜索方式如下："><a href="#KVC取值原理为，当调用valueForKey：-”name“的代码时，KVC对key的搜索方式不同于setValue：属性值-forKey：-”name“，其搜索方式如下：" class="headerlink" title="KVC取值原理为，当调用valueForKey：@”name“的代码时，KVC对key的搜索方式不同于setValue：属性值 forKey：@”name“，其搜索方式如下："></a><strong>KVC取值原理为，当调用<code>valueForKey：@”name“</code>的代码时，KVC对<code>key</code>的搜索方式不同于<code>setValue：属性值 forKey：@”name“</code>，其搜索方式如下：</strong></h3><ul>
+<li>首先按<code>get&lt;Key&gt;</code>,<code>&lt;key&gt;</code>,<code>is&lt;Key&gt;</code>的顺序方法查找<code>getter</code>方法，找到的话会直接调用。如果是<code>BOOL</code>或者<code>Int</code>等值类型， 会将其包装成一个<code>NSNumber</code>对象</li>
+<li>如果上面的<code>getter</code>没有找到，KVC则会查找<code>countOf&lt;Key&gt;</code>,<code>objectIn&lt;Key&gt;AtIndex</code>或<code>&lt;Key&gt;AtIndexes</code>格式的方法。如果<code>countOf&lt;Key&gt;</code>方法和另外两个方法中的一个被找到，那么就会返回一个可以响应<code>NSArray</code>所有方法的代理集合(它是<code>NSKeyValueArray</code>，是<code>NSArray</code>的子类)，调用这个代理集合的方法，或者说给这个代理集合发送属于<code>NSArray</code>的方法，就会以<code>countOf&lt;Key&gt;</code>,<code>objectIn&lt;Key&gt;AtIndex</code>或<code>&lt;Key&gt;AtIndexes</code>这几个方法组合的形式调用。还有一个可选的<code>get&lt;Key&gt;:range:</code>方法。所以你想重新定义KVC的一些功能，你可以添加这些方法，需要注意的是你的方法名要符合KVC的标准命名方法，包括方法签名</li>
+<li>如果上面的方法没有找到，那么会同时查找<code>countOf&lt;Key&gt;</code>，<code>enumeratorOf&lt;Key&gt;</code>,<code>memberOf&lt;Key&gt;</code>格式的方法。如果这三个方法都找到，那么就返回一个可以响应<code>NSSet</code>所的方法的代理集合，和上面一样，给这个代理集合发<code>NSSet</code>的消息，就会以<code>countOf&lt;Key&gt;</code>，<code>enumeratorOf&lt;Key&gt;</code>,<code>memberOf&lt;Key&gt;</code>组合的形式调用</li>
+<li>如果还没有找到，再检查类方法<code>+ (BOOL)accessInstanceVariablesDirectly</code>,如果返回YES(默认行为)，那么和先前的设值一样，会按<code>_&lt;key&gt;,_is&lt;Key&gt;,&lt;key&gt;,is&lt;Key&gt;</code>的顺序搜索成员变量名，这里不推荐这么做，因为这样直接访问实例变量破坏了封装性，使代码更脆弱。如果重写了类方法<code>+ (BOOL)accessInstanceVariablesDirectly</code>返回NO的话，那么会直接调用<code>valueForUndefinedKey:</code></li>
+<li>还没有找到的话，调用<code>valueForUndefinedKey:</code></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/09/Flutter%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Song">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="成长历程1996">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/09/Flutter%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" class="post-title-link" itemprop="url">Flutter启动流程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-12-09 14:00:00 / Modified: 14:05:22" itemprop="dateCreated datePublished" datetime="2021-12-09T14:00:00+08:00">2021-12-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Flutter启动流程"><a href="#Flutter启动流程" class="headerlink" title="Flutter启动流程"></a>Flutter启动流程</h2><p>启动代码如下</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runApp(MyApp());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> MyApp(&#123;Key key&#125;) : <span class="keyword">super</span>(key: key);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> Container();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查看runApp方法可发现</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> runApp(Widget app) &#123;</span><br><span class="line">  WidgetsFlutterBinding.ensureInitialized()</span><br><span class="line">    ..scheduleAttachRootWidget(app)</span><br><span class="line">    ..scheduleWarmUpFrame();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>WidgetsFlutterBinding.ensureInitialized()</code> 方法可发现，此方法用来初始化binding</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> WidgetsBinding ensureInitialized() &#123;</span><br><span class="line">    <span class="keyword">if</span> (WidgetsBinding.instance == <span class="keyword">null</span>)</span><br><span class="line">      WidgetsFlutterBinding();</span><br><span class="line">    <span class="keyword">return</span> WidgetsBinding.instance;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>由此可发现binding是一系列单例，在通过<code>WidgetsFlutterBinding.ensureInitialized()</code> 方法时，同时初始化了<code>WidgetsFlutterBinding</code>、<code>BindingBase</code>、<code>GestureBinding</code>、<code>SchedulerBinding</code>、<code>ServicesBinding</code>等。</p>
+<ul>
+<li><code>BindingBase</code>：是所有类的基类，负责初始化其他类，初始化一些Native相关信息（如iOS、android、fuchsia、macOS、Linux、Windows）、注册native事件</li>
+<li><code>GestureBinding</code>：提供<code>window.onPointerDataPacket</code>回调,接受Native事件，负责事件转换及分发</li>
+<li><code>SchedulerBinding</code>: 使用了<code>window.scheduleFrame</code>来通知Native及使用<code>window.onBeginFrame</code>和<code>window.onDrawFrame</code>回调来接收消息，主要是负责通知Native在下一侦的事件下发与事件注册，当我们调用setState后，就会触发此类的方法，等待事件下发后进行渲染</li>
+<li><code>ServicesBinding</code>: 使用<code>window.onPlatformMessage</code>回调，负责通道相关的初始化及通信相关的处理</li>
+<li><code>PaintingBinding</code>: 与绘制相关的函数绑定，还处理一些图片渲染相关的缓存</li>
+<li><code>SemanticsBinding</code>: 注册平台相关的<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22article%22,%22sourceId%22:388724188%7D">辅助函数</a></li>
+<li><code>RendererBinding</code>: 初始化<code>PipelineOwner</code>、<code>renderView</code>、<code>onMetricsChanged</code>、<code>onTextScaleFactorChanged</code>、<code>onPlatformBrightnessChanged</code>、<code>onSemanticsEnabledChangedonSemanticsAction</code>等，用于监听并处理平台渲染相关如字体、状态栏改变时的事件，是渲染输与Flutter engine沟通的桥梁</li>
+<li><code>WidgetsBinding</code>: 初始化<code>BuildOwner</code>，注册<code>window.onLocaleChanged</code>、<code>onBuildScheduled</code>等回调。它是Flutter widget层与engine的桥梁。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/08/Flutter%20%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%8D%87%E9%99%8D%E7%BA%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -791,7 +959,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
