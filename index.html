@@ -145,6 +145,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/08/IOS%E5%86%85%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Song">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="成长历程1996">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/08/IOS%E5%86%85%E5%AD%98/" class="post-title-link" itemprop="url">iOS内存管理方案</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-02-08 14:00:00 / Modified: 16:24:29" itemprop="dateCreated datePublished" datetime="2022-02-08T14:00:00+08:00">2022-02-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="iOS内存管理方案："><a href="#iOS内存管理方案：" class="headerlink" title="iOS内存管理方案："></a>iOS内存管理方案：</h3><p>由以下三种方案结合 </p>
+<h4 id="Tagged-Pointer-64位系统"><a href="#Tagged-Pointer-64位系统" class="headerlink" title="Tagged Pointer(64位系统)"></a>Tagged Pointer(64位系统)</h4><blockquote>
+<p>储存NSNumber以及NSDate等类型，以节省内存及提高效率，指针不指向任何地址，指针由标识+值构成</p>
+</blockquote>
+<h4 id="NONPOINTER-ISA-非指针类型"><a href="#NONPOINTER-ISA-非指针类型" class="headerlink" title="NONPOINTER_ISA(非指针类型"></a>NONPOINTER_ISA(非指针类型</h4><blockquote>
+<p>isa指针除了含有内存地址，还含有其他字段</p>
+</blockquote>
+<ul>
+<li>第一位的0或1代表是纯地址isa指针还是NONPOINTER_ISA</li>
+<li>第二位代表是否有关联对象</li>
+<li>第三位代表是否有C++代码</li>
+<li>接下来33位代表指向的内存地址</li>
+<li>接下来弱引用标记</li>
+<li>接下来dealloc标记等</li>
+</ul>
+<h4 id="引用计数表和weak表-散列表"><a href="#引用计数表和weak表-散列表" class="headerlink" title="(引用计数表和weak表)散列表"></a>(引用计数表和weak表)散列表</h4><ul>
+<li>SideTables在非嵌入式的64位系统里有64张SideTable表</li>
+<li>每一张SideTable表主要由三部分组成：自旋锁、引用计数表、弱引用表</li>
+<li>全局的引用计数表不存在同一张表里，是为了避免资源竞争，解决效率问题</li>
+<li>引用计数表加入了分离锁概念，将一张表拆分为多个部分，对他们分别加锁，使得可以并发操作，提高执行效率</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/21/iOS%20KVC%E7%9A%84%E4%BD%BF%E7%94%A8%E3%80%81%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86%20/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -959,7 +1038,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -989,7 +1068,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
