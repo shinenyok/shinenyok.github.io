@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="var NexT &#x3D; window.NexT || {};     var CONFIG &#x3D; {&quot;hostname&quot;:&quot;example.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;7.8.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;dis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2024/01/28/2021/07/02/%E5%88%9B%E5%BB%BAFlutter%E6%8F%92%E4%BB%B6package/index/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="var NexT &#x3D; window.NexT || {};     var CONFIG &#x3D; {&quot;hostname&quot;:&quot;example.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;7.8.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;dis">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://shineyoki.oss-cn-beijing.aliyuncs.com/11476712.png">
+<meta property="article:published_time" content="2024-01-28T01:52:07.722Z">
+<meta property="article:modified_time" content="2024-01-28T02:20:06.322Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shineyoki.oss-cn-beijing.aliyuncs.com/11476712.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2021/07/02/创建Flutter插件package/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/01/28/2021/07/02/%E5%88%9B%E5%BB%BAFlutter%E6%8F%92%E4%BB%B6package/index/" class="article-date">
+  <time class="dt-published" datetime="2024-01-28T01:52:07.722Z" itemprop="datePublished">2024-01-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="一、创建package 要创建纯 Dart 库的 package，使用带有 –template&#x3D;package 标志的 flutter create 命令 要创建原生插件 package，使用带有 –template&#x3D;plugin 标志的 flutter create 命令 使用 –org 选项，以反向域名表示法来指定你的组织。该值用于生成的 Android 及 iOS 代码 使用 -a 选项指定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="创建Flutter插件package">
+<meta property="og:url" content="http://example.com/2021/07/02/%E5%88%9B%E5%BB%BAFlutter%E6%8F%92%E4%BB%B6package/index.html">
+<meta property="og:site_name" content="shineyoki的技术生涯">
+<meta property="og:description" content="一、创建package 要创建纯 Dart 库的 package，使用带有 –template&#x3D;package 标志的 flutter create 命令 要创建原生插件 package，使用带有 –template&#x3D;plugin 标志的 flutter create 命令 使用 –org 选项，以反向域名表示法来指定你的组织。该值用于生成的 Android 及 iOS 代码 使用 -a 选项指定">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://shineyoki.oss-cn-beijing.aliyuncs.com/11476712.png">
+<meta property="article:published_time" content="2021-07-02T09:22:42.000Z">
+<meta property="article:modified_time" content="2021-07-02T09:29:07.893Z">
+<meta property="article:author" content="Song">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shineyoki.oss-cn-beijing.aliyuncs.com/11476712.png">
+
+<link rel="canonical" href="http://example.com/2021/07/02/%E5%88%9B%E5%BB%BAFlutter%E6%8F%92%E4%BB%B6package/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>创建Flutter插件package | shineyoki的技术生涯</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">shineyoki的技术生涯</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/02/%E5%88%9B%E5%BB%BAFlutter%E6%8F%92%E4%BB%B6package/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Song">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shineyoki的技术生涯">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          创建Flutter插件package
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-02 17:22:42 / Modified: 17:29:07" itemprop="dateCreated datePublished" datetime="2021-07-02T17:22:42+08:00">2021-07-02</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="一、创建package"><a href="#一、创建package" class="headerlink" title="一、创建package"></a>一、创建package</h3><ul>
+<li>要创建纯 Dart 库的 package，使用带有 –template=package 标志的 flutter create 命令</li>
+<li>要创建原生插件 package，使用带有 –template=plugin 标志的 flutter create 命令</li>
+<li>使用 –org 选项，以反向域名表示法来指定你的组织。该值用于生成的 Android 及 iOS 代码</li>
+<li>使用 -a 选项指定 Android 的语言，或使用 -i 选项指定 iOS 的语言</li>
+<li>默认情况下插件项目中 iOS 代码使用 Swift 编写， Android 代码使用 Kotlin 编写</li>
+<li>例如创建一个名为hello的库<h4 id="1-纯Dart库"><a href="#1-纯Dart库" class="headerlink" title="1.纯Dart库"></a>1.纯Dart库</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter create --template=package hello</span><br></pre></td></tr></table></figure>
+<h4 id="2-iOS-swift、android-java"><a href="#2-iOS-swift、android-java" class="headerlink" title="2.iOS swift、android java"></a>2.iOS swift、android java</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter create --org com.example --template=plugin --platforms=android,ios -a java hello</span><br></pre></td></tr></table></figure>
+<h4 id="3-iOS-Object-C、android-java"><a href="#3-iOS-Object-C、android-java" class="headerlink" title="3.iOS Object-C、android java"></a>3.iOS Object-C、android java</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter create --org com.example --template=plugin --platforms=android,ios -a java -i objc  hello</span><br></pre></td></tr></table></figure>
+<h4 id="4-iOS-Object-C、android-Kotlin"><a href="#4-iOS-Object-C、android-Kotlin" class="headerlink" title="4.iOS Object-C、android Kotlin"></a>4.iOS Object-C、android Kotlin</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter create --org com.example --template=plugin --platforms=android,ios -i objc hello</span><br></pre></td></tr></table></figure>
+<h4 id="5-iOS-Swift、android-Kotlin"><a href="#5-iOS-Swift、android-Kotlin" class="headerlink" title="5.iOS Swift、android Kotlin"></a>5.iOS Swift、android Kotlin</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter create --org com.example --template=plugin --platforms=android,ios hello</span><br></pre></td></tr></table></figure>
+<h4 id="注：纯Dart库是不会自动创建example项目的，但可以在库文件夹里自己创建一个example项目-然后在pubspec-yaml通过路径引用"><a href="#注：纯Dart库是不会自动创建example项目的，但可以在库文件夹里自己创建一个example项目-然后在pubspec-yaml通过路径引用" class="headerlink" title="注：纯Dart库是不会自动创建example项目的，但可以在库文件夹里自己创建一个example项目 然后在pubspec.yaml通过路径引用"></a>注：纯Dart库是不会自动创建example项目的，但可以在库文件夹里自己创建一个example项目 然后在pubspec.yaml通过路径引用</h4><h3 id="二、package引用等完善"><a href="#二、package引用等完善" class="headerlink" title="二、package引用等完善"></a>二、package引用等完善</h3><h4 id="1、完成插件以及example逻辑"><a href="#1、完成插件以及example逻辑" class="headerlink" title="1、完成插件以及example逻辑"></a>1、完成插件以及example逻辑</h4><h4 id="2、在插件的pubspec-yaml里编辑完成插件名字、介绍、版本、源代码地址等"><a href="#2、在插件的pubspec-yaml里编辑完成插件名字、介绍、版本、源代码地址等" class="headerlink" title="2、在插件的pubspec.yaml里编辑完成插件名字、介绍、版本、源代码地址等"></a>2、在插件的pubspec.yaml里编辑完成插件名字、介绍、版本、源代码地址等</h4>如下图<br><img src="https://shineyoki.oss-cn-beijing.aliyuncs.com/11476712.png" alt="图片.png"><h4 id="3、完善readme、changelog等文档以及编写license-在github等找个MIT或者Apache的就行"><a href="#3、完善readme、changelog等文档以及编写license-在github等找个MIT或者Apache的就行" class="headerlink" title="3、完善readme、changelog等文档以及编写license(在github等找个MIT或者Apache的就行)"></a>3、完善readme、changelog等文档以及编写license(在github等找个MIT或者Apache的就行)</h4><h4 id="4、在终端进入插件文件夹，执行"><a href="#4、在终端进入插件文件夹，执行" class="headerlink" title="4、在终端进入插件文件夹，执行"></a>4、在终端进入插件文件夹，执行</h4>插件检查<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter packages pub publish --dry-run</span><br></pre></td></tr></table></figure>
+发布<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter packages pub publish --server=https://pub.dartlang.org</span><br></pre></td></tr></table></figure>
+之后提示是否确定发布<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Do you want to publish flutter_plugin_calendar 0.0.1 (y/N)? </span><br></pre></td></tr></table></figure>
+确定输入y 回车 发布完成<br>完整流程如下<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line">shineyokdeMacBook-Pro:calendar admin$ flutter packages pub publish --server=https://pub.dartlang.org</span><br><span class="line">Publishing flutter_plugin_calendar 0.0.1 to https://pub.dartlang.org:</span><br><span class="line">|-- .gitignore</span><br><span class="line">|-- .metadata</span><br><span class="line">|-- .vscode</span><br><span class="line">|   &#x27;-- launch.json</span><br><span class="line">|-- CHANGELOG.md</span><br><span class="line">|-- LICENSE</span><br><span class="line">|-- README.md</span><br><span class="line">|-- example</span><br><span class="line">|   |-- .gitignore</span><br><span class="line">|   |-- .metadata</span><br><span class="line">|   |-- README.md</span><br><span class="line">|   |-- android</span><br><span class="line">|   |   |-- .gitignore</span><br><span class="line">|   |   |-- app</span><br><span class="line">|   |   |   |-- build.gradle</span><br><span class="line">|   |   |   &#x27;-- src</span><br><span class="line">|   |   |       |-- debug</span><br><span class="line">|   |   |       |   &#x27;-- AndroidManifest.xml</span><br><span class="line">|   |   |       |-- main</span><br><span class="line">|   |   |       |   |-- AndroidManifest.xml</span><br><span class="line">|   |   |       |   |-- kotlin</span><br><span class="line">|   |   |       |   |   &#x27;-- com</span><br><span class="line">|   |   |       |   |       &#x27;-- example</span><br><span class="line">|   |   |       |   |           &#x27;-- example</span><br><span class="line">|   |   |       |   |               &#x27;-- MainActivity.kt</span><br><span class="line">|   |   |       |   &#x27;-- res</span><br><span class="line">|   |   |       |       |-- drawable</span><br><span class="line">|   |   |       |       |   &#x27;-- launch_background.xml</span><br><span class="line">|   |   |       |       |-- mipmap-hdpi</span><br><span class="line">|   |   |       |       |   &#x27;-- ic_launcher.png</span><br><span class="line">|   |   |       |       |-- mipmap-mdpi</span><br><span class="line">|   |   |       |       |   &#x27;-- ic_launcher.png</span><br><span class="line">|   |   |       |       |-- mipmap-xhdpi</span><br><span class="line">|   |   |       |       |   &#x27;-- ic_launcher.png</span><br><span class="line">|   |   |       |       |-- mipmap-xxhdpi</span><br><span class="line">|   |   |       |       |   &#x27;-- ic_launcher.png</span><br><span class="line">|   |   |       |       |-- mipmap-xxxhdpi</span><br><span class="line">|   |   |       |       |   &#x27;-- ic_launcher.png</span><br><span class="line">|   |   |       |       &#x27;-- values</span><br><span class="line">|   |   |       |           &#x27;-- styles.xml</span><br><span class="line">|   |   |       &#x27;-- profile</span><br><span class="line">|   |   |           &#x27;-- AndroidManifest.xml</span><br><span class="line">|   |   |-- build.gradle</span><br><span class="line">|   |   |-- gradle</span><br><span class="line">|   |   |   &#x27;-- wrapper</span><br><span class="line">|   |   |       &#x27;-- gradle-wrapper.properties</span><br><span class="line">|   |   |-- gradle.properties</span><br><span class="line">|   |   &#x27;-- settings.gradle</span><br><span class="line">|   |-- ios</span><br><span class="line">|   |   |-- .gitignore</span><br><span class="line">|   |   |-- Flutter</span><br><span class="line">|   |   |   |-- AppFrameworkInfo.plist</span><br><span class="line">|   |   |   |-- Debug.xcconfig</span><br><span class="line">|   |   |   &#x27;-- Release.xcconfig</span><br><span class="line">|   |   |-- Runner</span><br><span class="line">|   |   |   |-- AppDelegate.swift</span><br><span class="line">|   |   |   |-- Assets.xcassets</span><br><span class="line">|   |   |   |   |-- AppIcon.appiconset</span><br><span class="line">|   |   |   |   |   |-- Contents.json</span><br><span class="line">|   |   |   |   |   |-- Icon-App-1024x1024@1x.png</span><br><span class="line">|   |   |   |   |   |-- Icon-App-20x20@1x.png</span><br><span class="line">|   |   |   |   |   | (10 more...)</span><br><span class="line">|   |   |   |   |   |-- Icon-App-76x76@1x.png</span><br><span class="line">|   |   |   |   |   |-- Icon-App-76x76@2x.png</span><br><span class="line">|   |   |   |   |   &#x27;-- Icon-App-83.5x83.5@2x.png</span><br><span class="line">|   |   |   |   &#x27;-- LaunchImage.imageset</span><br><span class="line">|   |   |   |       |-- Contents.json</span><br><span class="line">|   |   |   |       |-- LaunchImage.png</span><br><span class="line">|   |   |   |       |-- LaunchImage@2x.png</span><br><span class="line">|   |   |   |       |-- LaunchImage@3x.png</span><br><span class="line">|   |   |   |       &#x27;-- README.md</span><br><span class="line">|   |   |   |-- Base.lproj</span><br><span class="line">|   |   |   |   |-- LaunchScreen.storyboard</span><br><span class="line">|   |   |   |   &#x27;-- Main.storyboard</span><br><span class="line">|   |   |   |-- Info.plist</span><br><span class="line">|   |   |   &#x27;-- Runner-Bridging-Header.h</span><br><span class="line">|   |   |-- Runner.xcodeproj</span><br><span class="line">|   |   |   |-- project.pbxproj</span><br><span class="line">|   |   |   |-- project.xcworkspace</span><br><span class="line">|   |   |   |   |-- contents.xcworkspacedata</span><br><span class="line">|   |   |   |   &#x27;-- xcshareddata</span><br><span class="line">|   |   |   |       |-- IDEWorkspaceChecks.plist</span><br><span class="line">|   |   |   |       &#x27;-- WorkspaceSettings.xcsettings</span><br><span class="line">|   |   |   &#x27;-- xcshareddata</span><br><span class="line">|   |   |       &#x27;-- xcschemes</span><br><span class="line">|   |   |           &#x27;-- Runner.xcscheme</span><br><span class="line">|   |   &#x27;-- Runner.xcworkspace</span><br><span class="line">|   |       |-- contents.xcworkspacedata</span><br><span class="line">|   |       &#x27;-- xcshareddata</span><br><span class="line">|   |           |-- IDEWorkspaceChecks.plist</span><br><span class="line">|   |           &#x27;-- WorkspaceSettings.xcsettings</span><br><span class="line">|   |-- lib</span><br><span class="line">|   |   &#x27;-- main.dart</span><br><span class="line">|   |-- pubspec.yaml</span><br><span class="line">|   &#x27;-- test</span><br><span class="line">|       &#x27;-- widget_test.dart</span><br><span class="line">|-- lib</span><br><span class="line">|   |-- flutter_plugin_calendar.dart</span><br><span class="line">|   |-- util</span><br><span class="line">|   |   &#x27;-- calendar_time_util.dart</span><br><span class="line">|   &#x27;-- view</span><br><span class="line">|       |-- calendar_day_item.dart</span><br><span class="line">|       |-- calendar_month_item.dart</span><br><span class="line">|       |-- calendar_month_view.dart</span><br><span class="line">|       |-- calendar_view.dart</span><br><span class="line">|       |-- calendar_week_item.dart</span><br><span class="line">|       &#x27;-- calendar_week_view.dart</span><br><span class="line">|-- pubspec.yaml</span><br><span class="line">&#x27;-- test</span><br><span class="line">    &#x27;-- flutter_plugin_calendar_test.dart</span><br><span class="line"></span><br><span class="line">Publishing is forever; packages cannot be unpublished.</span><br><span class="line">Policy details are available at https://pub.dev/policy</span><br><span class="line"></span><br><span class="line">Do you want to publish flutter_plugin_calendar 0.0.1 (y/N)? y</span><br><span class="line">Uploading...</span><br><span class="line">Successfully uploaded package.</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>iOS常用弹窗样式flutter插件<br><a target="_blank" rel="noopener" href="https://pub.dev/packages/alert_tool">https://pub.dev/packages/alert_tool</a><br>常用日历样式插件<br><a target="_blank" rel="noopener" href="https://pub.dev/packages/flutter_plugin_calendar">https://pub.dev/packages/flutter_plugin_calendar</a><br>常用通讯录/地址选择器样式<br><a target="_blank" rel="noopener" href="https://pub.dev/packages/contactor_picker">https://pub.dev/packages/contactor_picker</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/24/Flutter%E4%B9%8BDart%E8%AF%AD%E8%A8%80%E7%89%B9%E7%82%B9/" rel="next" title="Flutter之Dart语言特点">
+      Flutter之Dart语言特点 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BApackage"><span class="nav-number">1.</span> <span class="nav-text">一、创建package</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E7%BA%AFDart%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">1.纯Dart库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-iOS-swift%E3%80%81android-java"><span class="nav-number">1.2.</span> <span class="nav-text">2.iOS swift、android java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-iOS-Object-C%E3%80%81android-java"><span class="nav-number">1.3.</span> <span class="nav-text">3.iOS Object-C、android java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-iOS-Object-C%E3%80%81android-Kotlin"><span class="nav-number">1.4.</span> <span class="nav-text">4.iOS Object-C、android Kotlin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-iOS-Swift%E3%80%81android-Kotlin"><span class="nav-number">1.5.</span> <span class="nav-text">5.iOS Swift、android Kotlin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%EF%BC%9A%E7%BA%AFDart%E5%BA%93%E6%98%AF%E4%B8%8D%E4%BC%9A%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BAexample%E9%A1%B9%E7%9B%AE%E7%9A%84%EF%BC%8C%E4%BD%86%E5%8F%AF%E4%BB%A5%E5%9C%A8%E5%BA%93%E6%96%87%E4%BB%B6%E5%A4%B9%E9%87%8C%E8%87%AA%E5%B7%B1%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAexample%E9%A1%B9%E7%9B%AE-%E7%84%B6%E5%90%8E%E5%9C%A8pubspec-yaml%E9%80%9A%E8%BF%87%E8%B7%AF%E5%BE%84%E5%BC%95%E7%94%A8"><span class="nav-number">1.6.</span> <span class="nav-text">注：纯Dart库是不会自动创建example项目的，但可以在库文件夹里自己创建一个example项目 然后在pubspec.yaml通过路径引用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81package%E5%BC%95%E7%94%A8%E7%AD%89%E5%AE%8C%E5%96%84"><span class="nav-number">2.</span> <span class="nav-text">二、package引用等完善</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%AE%8C%E6%88%90%E6%8F%92%E4%BB%B6%E4%BB%A5%E5%8F%8Aexample%E9%80%BB%E8%BE%91"><span class="nav-number">2.1.</span> <span class="nav-text">1、完成插件以及example逻辑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%9C%A8%E6%8F%92%E4%BB%B6%E7%9A%84pubspec-yaml%E9%87%8C%E7%BC%96%E8%BE%91%E5%AE%8C%E6%88%90%E6%8F%92%E4%BB%B6%E5%90%8D%E5%AD%97%E3%80%81%E4%BB%8B%E7%BB%8D%E3%80%81%E7%89%88%E6%9C%AC%E3%80%81%E6%BA%90%E4%BB%A3%E7%A0%81%E5%9C%B0%E5%9D%80%E7%AD%89"><span class="nav-number">2.2.</span> <span class="nav-text">2、在插件的pubspec.yaml里编辑完成插件名字、介绍、版本、源代码地址等</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E5%AE%8C%E5%96%84readme%E3%80%81changelog%E7%AD%89%E6%96%87%E6%A1%A3%E4%BB%A5%E5%8F%8A%E7%BC%96%E5%86%99license-%E5%9C%A8github%E7%AD%89%E6%89%BE%E4%B8%AAMIT%E6%88%96%E8%80%85Apache%E7%9A%84%E5%B0%B1%E8%A1%8C"><span class="nav-number">2.3.</span> <span class="nav-text">3、完善readme、changelog等文档以及编写license(在github等找个MIT或者Apache的就行)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81%E5%9C%A8%E7%BB%88%E7%AB%AF%E8%BF%9B%E5%85%A5%E6%8F%92%E4%BB%B6%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%8C%E6%89%A7%E8%A1%8C"><span class="nav-number">2.4.</span> <span class="nav-text">4、在终端进入插件文件夹，执行</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Song</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">豫ICP备 - 2021018979 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Song</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+    <script src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/01/28/2021/07/02/%E5%88%9B%E5%BB%BAFlutter%E6%8F%92%E4%BB%B6package/index/" data-id="clrwvcs4r00008kky7icz88f0" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/01/28/2021/10/08/Flutter%E4%B9%8Bwidget%E6%A6%82%E8%A7%88/index/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/01/28/2022/02/16/iOS%20KVO%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86/index/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/28/2022/02/08/IOS%E5%86%85%E5%AD%98/index/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/28/2021/12/08/Flutter%20%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%8D%87%E9%99%8D%E7%BA%A7/index/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/28/2021/12/09/Flutter%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/index/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/28/2021/12/21/iOS%20KVC%E7%9A%84%E4%BD%BF%E7%94%A8%E3%80%81%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86%20/index/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
