@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="var NexT &#x3D; window.NexT || {};     var CONFIG &#x3D; {&quot;hostname&quot;:&quot;example.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;7.8.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;dis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2024/01/28/Flutter%20%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%8D%87%E9%99%8D%E7%BA%A7/index/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="var NexT &#x3D; window.NexT || {};     var CONFIG &#x3D; {&quot;hostname&quot;:&quot;example.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;7.8.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;dis">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-01-28T01:52:07.724Z">
+<meta property="article:modified_time" content="2024-01-28T06:19:08.893Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Flutter 安装以及升降级/index" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/01/28/Flutter%20%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%8D%87%E9%99%8D%E7%BA%A7/index/" class="article-date">
+  <time class="dt-published" datetime="2024-01-28T01:52:07.724Z" itemprop="datePublished">2024-01-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Flutter 安装下载Flutter SDK的几种方式： 打开Flutter官方网站，选择最新稳定的Flutter Stable版本，解压至本地存放flutter工具包的目录下 终端使用git下载 进入目标文件夹后git clone 如 12cd Documents&#x2F;      git clone -b stable [https:&#x2F;&#x2F;github.com&#x2F;flutter&#x2F;flutter.git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter 安装以及升降级">
+<meta property="og:url" content="http://example.com/2021/12/08/Flutter%20%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%8D%87%E9%99%8D%E7%BA%A7/index.html">
+<meta property="og:site_name" content="shineyoki的技术生涯">
+<meta property="og:description" content="Flutter 安装下载Flutter SDK的几种方式： 打开Flutter官方网站，选择最新稳定的Flutter Stable版本，解压至本地存放flutter工具包的目录下 终端使用git下载 进入目标文件夹后git clone 如 12cd Documents&#x2F;      git clone -b stable [https:&#x2F;&#x2F;github.com&#x2F;flutter&#x2F;flutter.git">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-08T10:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-08T10:01:58.043Z">
+<meta property="article:author" content="Song">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/12/08/Flutter%20%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%8D%87%E9%99%8D%E7%BA%A7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Flutter 安装以及升降级 | shineyoki的技术生涯</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">shineyoki的技术生涯</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/08/Flutter%20%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%8D%87%E9%99%8D%E7%BA%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Song">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shineyoki的技术生涯">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flutter 安装以及升降级
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-12-08 18:00:00 / Modified: 18:01:58" itemprop="dateCreated datePublished" datetime="2021-12-08T18:00:00+08:00">2021-12-08</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Flutter-安装"><a href="#Flutter-安装" class="headerlink" title="Flutter 安装"></a>Flutter 安装</h1><h2 id="下载Flutter-SDK的几种方式："><a href="#下载Flutter-SDK的几种方式：" class="headerlink" title="下载Flutter SDK的几种方式："></a><strong>下载Flutter SDK的几种方式：</strong></h2><ol>
+<li>打开<a target="_blank" rel="noopener" href="https://docs.flutter.dev/development/tools/sdk/releases"><code>Flutter官方网站</code></a>，选择最新稳定的Flutter Stable版本，解压至本地存放flutter工具包的目录下</li>
+<li>终端使用git下载 进入目标文件夹后git clone 如 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd Documents/ </span><br><span class="line">     git clone -b stable [https:<span class="comment">//github.com/flutter/flutter.git](https://github.com/flutter/flutter.git)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>使用Git客户端如SourceTree、CornerStone下载flutter至本地，切换至stable分支</li>
+</ol>
+<h2 id="配置Flutter环境变量"><a href="#配置Flutter环境变量" class="headerlink" title="配置Flutter环境变量"></a><strong>配置Flutter环境变量</strong></h2><h3 id="Windows配置"><a href="#Windows配置" class="headerlink" title="Windows配置"></a>Windows配置</h3><blockquote>
+<p>配置步骤如下</p>
+<ul>
+<li>打开 “*<code>控制面板&gt;用户帐户&gt;用户帐户&gt;更改我的环境变量</code>*”</li>
+<li>在“用户变量”下检查是否有名为“Path”的条目</li>
+<li>如果该条目存在, 追加 <em>flutter\bin</em>的全路径，使用 ; 作为分隔符.</li>
+<li>如果条目不存在,创建一个新用户变量Path，然后将<em>flutter\bin</em>的全路径作为它的值.在“用户变量”下检查是否有”PUB_HOSTED_URL””FLUTTER_STORAGE_BASE_URL”的条目，如果没有，也添加它们 。  <aside>
+  💡 `PUB_HOSTED_URL`值为`[https://pub.flutter-io.cn](https://pub.flutter-io.cn)`
+  
+  <code>FLUTTER_STORAGE_BASE_URL</code>值为<code>[https://storage.flutter-io.cn](https://storage.flutter-io.cn)</code>  </aside>
+  </li>
+<li>重启Windows以应用此更改。</li>
+</ul>
+</blockquote>
+<h3 id="Mac、Linux配置"><a href="#Mac、Linux配置" class="headerlink" title="Mac、Linux配置"></a>Mac、Linux配置</h3><ul>
+<li>打开(或创建).bash_profile</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch *$HOME/.bash_profile</span><br><span class="line">或者</span><br><span class="line">open $HOME/.bash_profile*</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在.bash_profile文件中添加路径，如</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> FLUTTER_HOME=$HOME/flutter</span><br><span class="line"><span class="keyword">export</span> PATH=$PATH:$FLUTTER_HOME/bin</span><br><span class="line"><span class="keyword">export</span> PATH=$PATH:$FLUTTER_HOME/bin/cache/dart-sdk/bin</span><br><span class="line"><span class="keyword">export</span> FLUTTER_STORAGE_BASE_URL=https:<span class="comment">//storage.flutter-io.cn</span></span><br><span class="line"><span class="keyword">export</span> PUB_HOSTED_URL=https:<span class="comment">//pub.flutter-io.cn</span></span><br></pre></td></tr></table></figure>
+
+<p>保存后运行以下命令来刷新当前终端窗口 </p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source $HOME/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果终端是zsh，终端启动时 ~/.bash_profile 将不会被加载，解决办法就是修改 ～/.zshrc ，在其中添加：source ～/.bash_profile</p>
+</blockquote>
+<aside>
+💡 echo $PATH可以验证“flutter/bin”是否已在PATH中
+
+<p>安装Xcode 9.0或更新版本通过苹果应用商店配置Xcode命令行工具以使用新安装的Xcode版本</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*sudo xcode-select --<span class="keyword">switch</span> /Applications/Xcode.app/Contents/Develope*r</span><br></pre></td></tr></table></figure>
+
+<p>对于大多数情况，当您想要使用最新版本的Xcode时，这是正确的路径。如果您需要使用不同的版本，请指定相应路径。</p>
+<p>确保Xcode许可协议是通过打开一次Xcode或通过命令<code>*sudo xcodebuild -license*</code>同意过了.    终端运行flutter doctor</p>
+</aside>
+
+<h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><p>AndroidStudio</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://developer.android.com/studio/index.html">https://developer.android.com/studio/index.html</a></p>
+<ul>
+<li>启动Android Studio</li>
+<li>执行“Android Studio安装向导”。这将安装最新的Android SDK、Android SDK平台工具和Android SDK构建工具，这些是用Flutter进行Android开发所需要的。</li>
+<li>打开AndroidStudio偏好设置(<em>macOS：<code>Preferences&gt;Plugins</code>，Windows：<code>File&gt;Settings&gt;Plugins</code></em>),点击plugins下载flutter以及dart依赖包，重启后生效。</li>
+<li>终端运行flutter doctor。</li>
+</ul>
+<h1 id="Flutter升降级"><a href="#Flutter升降级" class="headerlink" title="Flutter升降级"></a>Flutter升降级</h1><ul>
+<li>查看flutter当前版本  <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter —version</span><br></pre></td></tr></table></figure>
+</li>
+<li>Flutter分支——master、dev、beta、stable  <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter channel</span><br></pre></td></tr></table></figure>
+</li>
+<li>Flutter切换分支  <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter channel stable</span><br></pre></td></tr></table></figure>
+</li>
+<li>Flutter升级至最新版本  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#切换至stable分支</span><br><span class="line">flutter channel stable</span><br><span class="line">#版本升级</span><br><span class="line">flutter upgrade</span><br></pre></td></tr></table></figure>
+</li>
+<li>Flutter降级至指定版本，如  <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#切换至stable分支</span><br><span class="line">flutter channel stable</span><br><span class="line">#降级</span><br><span class="line">flutter downgrade v1<span class="number">.22</span><span class="number">.6</span> #git checkout <span class="number">1.22</span><span class="number">.6</span> or git reset —hard <span class="number">1.22</span><span class="number">.6</span></span><br><span class="line">#删除工具链缓存（可选）</span><br><span class="line">rm -rf bin/cache</span><br><span class="line">#重新拉取工具链</span><br><span class="line">flutter precache #or flutter doctor</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/08/Flutter%E4%B9%8Bwidget%E6%A6%82%E8%A7%88/" rel="prev" title="Flutter之widget概览">
+      <i class="fa fa-chevron-left"></i> Flutter之widget概览
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/09/Flutter%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" rel="next" title="Flutter启动流程">
+      Flutter启动流程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Flutter-%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">Flutter 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDFlutter-SDK%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">下载Flutter SDK的几种方式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEFlutter%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">配置Flutter环境变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.1.</span> <span class="nav-text">Windows配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac%E3%80%81Linux%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.2.</span> <span class="nav-text">Mac、Linux配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-number">1.2.3.</span> <span class="nav-text">开发工具</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flutter%E5%8D%87%E9%99%8D%E7%BA%A7"><span class="nav-number">2.</span> <span class="nav-text">Flutter升降级</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Song</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Song</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+    <script src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/01/28/Flutter%20%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%8D%87%E9%99%8D%E7%BA%A7/index/" data-id="clrykfa9p0001kdky6oe2741t" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/01/28/iOS%20KVO%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86/index/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/01/28/Flutter%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/index/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/01/28/iOS%20KVO%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86/index/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/28/Flutter%20%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%8D%87%E9%99%8D%E7%BA%A7/index/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/28/Flutter%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/index/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/28/IOS%E5%86%85%E5%AD%98/index/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/28/iOS%20KVC%E7%9A%84%E4%BD%BF%E7%94%A8%E3%80%81%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86%20/index/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
