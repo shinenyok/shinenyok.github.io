@@ -7,10 +7,18 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 import '../platform/web_file_actions_stub.dart'
     if (dart.library.html) '../platform/web_file_actions_web.dart';
+import '../platform/open_external_stub.dart'
+    if (dart.library.html) '../platform/open_external_web.dart';
 import 'lan_transfer_client_stub.dart'
     if (dart.library.html) 'lan_transfer_client_web.dart';
 
 const _lanTransferStartCommand = 'dart run tool/local_converter_server.dart';
+const _localServerReleaseUrl =
+    'https://github.com/shinenyok/shinenyok.github.io/releases/latest';
+
+void _openLocalServerRelease() {
+  unawaited(openExternalUrl(_localServerReleaseUrl));
+}
 
 class LanTransferPage extends StatefulWidget {
   const LanTransferPage({super.key});
@@ -158,7 +166,7 @@ class _LanTransferPageState extends State<LanTransferPage> {
   }
 
   Future<void> _copyStartCommand() async {
-    await _copyText(_lanTransferStartCommand, message: '已复制启动命令，请粘贴到终端运行。');
+    await _copyText(_lanTransferStartCommand, message: '已复制 Dart 启动命令。');
   }
 
   void _scrollToBottomSoon() {
@@ -489,7 +497,7 @@ class _DesktopStartPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            '本地传输服务还没有连接。复制命令到终端运行后刷新。',
+            '本地传输服务还没有连接。没有 Dart 环境时，下载本地助手运行后刷新。',
             style: TextStyle(
               color: Color(0xff65736e),
               fontWeight: FontWeight.w700,
@@ -497,6 +505,23 @@ class _DesktopStartPanel extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              onPressed: _openLocalServerRelease,
+              icon: const Icon(Icons.download_outlined),
+              label: const Text('下载本地助手'),
+            ),
+          ),
+          const SizedBox(height: 12),
+          const Text(
+            '开发者命令',
+            style: TextStyle(
+              color: Color(0xff65736e),
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(height: 8),
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -513,10 +538,10 @@ class _DesktopStartPanel extends StatelessWidget {
           const SizedBox(height: 12),
           SizedBox(
             width: double.infinity,
-            child: FilledButton.icon(
+            child: OutlinedButton.icon(
               onPressed: onCopyStartCommand,
               icon: const Icon(Icons.play_arrow),
-              label: const Text('复制启动命令'),
+              label: const Text('复制 Dart 命令'),
             ),
           ),
           const SizedBox(height: 8),
@@ -841,9 +866,18 @@ class _StartServiceBubble extends StatelessWidget {
         children: [
           Text(
             isCompact
-                ? '手机网页不能启动电脑上的传输服务。请先在电脑上运行本地服务，再用电脑页面的二维码打开手机入口。'
-                : '本地传输服务还没有连接。浏览器不能直接启动本机进程，请复制命令到终端运行。',
+                ? '手机网页不能启动电脑上的传输服务。请在电脑打开本站，下载并运行本地助手，再用电脑页面的二维码进入。'
+                : '本地传输服务还没有连接。可以下载本地助手运行；开发者也可以复制 Dart 命令到终端。',
             style: TextStyle(fontSize: isCompact ? 15 : 16, height: 1.5),
+          ),
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              onPressed: _openLocalServerRelease,
+              icon: const Icon(Icons.download_outlined),
+              label: const Text('下载本地助手'),
+            ),
           ),
           const SizedBox(height: 12),
           Container(
@@ -868,7 +902,7 @@ class _StartServiceBubble extends StatelessWidget {
               child: FilledButton.icon(
                 onPressed: onCopyStartCommand,
                 icon: const Icon(Icons.play_arrow),
-                label: const Text('复制启动命令'),
+                label: const Text('复制 Dart 命令'),
               ),
             ),
             const SizedBox(height: 8),
@@ -888,7 +922,7 @@ class _StartServiceBubble extends StatelessWidget {
                 FilledButton.icon(
                   onPressed: onCopyStartCommand,
                   icon: const Icon(Icons.play_arrow),
-                  label: const Text('复制启动命令'),
+                  label: const Text('复制 Dart 命令'),
                 ),
                 OutlinedButton.icon(
                   onPressed: onRefresh,

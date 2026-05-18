@@ -216,7 +216,7 @@ class _FileConverterPageState extends State<FileConverterPage> {
 
   String _localConverterUnavailableMessage() {
     if (!_localConverterStatus.isRunning) {
-      return '请先运行：dart run tool/local_converter_server.dart';
+      return '请先下载并运行本地助手；开发者也可运行 dart run tool/local_converter_server.dart';
     }
     if (_localConverterStatus.missingTools.isNotEmpty) {
       return '本地转换服务缺少：${_localConverterStatus.missingTools.join(', ')}';
@@ -735,7 +735,7 @@ String _localStatusText(
     return '正在检测本地转换服务...';
   }
   if (!status.isRunning) {
-    return '本地增强服务未连接。运行 dart run tool/local_converter_server.dart 后刷新。';
+    return '本地增强服务未连接。下载并运行本地助手后刷新。';
   }
   if (mode.canUseLocal(status)) {
     return '本地增强服务已连接。';
