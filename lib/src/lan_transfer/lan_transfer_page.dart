@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -184,15 +185,22 @@ class _LanTransferPageState extends State<LanTransferPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isCompactPage = MediaQuery.sizeOf(context).width < 560;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 20, 24, 40),
+      padding: EdgeInsets.fromLTRB(
+        isCompactPage ? 12 : 24,
+        isCompactPage ? 12 : 20,
+        isCompactPage ? 12 : 24,
+        40,
+      ),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1180),
           child: LayoutBuilder(
             builder: (context, constraints) {
               final isWide = constraints.maxWidth >= 940;
-              final chatHeight = isWide ? 620.0 : 680.0;
+              final isCompact = constraints.maxWidth < 560;
+              final chatHeight = isWide ? 620.0 : (isCompact ? 560.0 : 680.0);
 
               final chat = SizedBox(
                 height: chatHeight,
@@ -659,19 +667,23 @@ class _ChatTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isCompact = _isCompactScreen(context);
     return Container(
-      height: 64,
-      padding: const EdgeInsets.symmetric(horizontal: 18),
+      height: isCompact ? 56 : 64,
+      padding: EdgeInsets.symmetric(horizontal: isCompact ? 10 : 18),
       color: const Color(0xfffbf8fd),
       child: Row(
         children: [
           const Icon(Icons.arrow_back, color: Color(0xff59595f)),
-          const SizedBox(width: 12),
-          const Expanded(
+          SizedBox(width: isCompact ? 6 : 12),
+          Expanded(
             child: Center(
               child: Text(
                 '文件共享',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                style: TextStyle(
+                  fontSize: isCompact ? 18 : 20,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
             ),
           ),
@@ -740,11 +752,17 @@ class _ChatTimeline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final entries = _timelineEntries(status);
+    final isCompact = _isCompactScreen(context);
     return Container(
       color: const Color(0xfffffbff),
       child: ListView(
         controller: scrollController,
-        padding: const EdgeInsets.fromLTRB(18, 20, 18, 26),
+        padding: EdgeInsets.fromLTRB(
+          isCompact ? 10 : 18,
+          isCompact ? 14 : 20,
+          isCompact ? 10 : 18,
+          26,
+        ),
         children: [
           if (!status.isRunning && showShareIntro)
             _StartServiceBubble(
@@ -815,14 +833,17 @@ class _StartServiceBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isCompact = _isCompactScreen(context);
     return _ChatBubble(
       maxWidth: 560,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            '本地传输服务还没有连接。浏览器不能直接启动本机进程，请复制命令到终端运行。',
-            style: TextStyle(fontSize: 16, height: 1.5),
+          Text(
+            isCompact
+                ? '手机网页不能启动电脑上的传输服务。请先在电脑上运行本地服务，再用电脑页面的二维码打开手机入口。'
+                : '本地传输服务还没有连接。浏览器不能直接启动本机进程，请复制命令到终端运行。',
+            style: TextStyle(fontSize: isCompact ? 15 : 16, height: 1.5),
           ),
           const SizedBox(height: 12),
           Container(
@@ -832,28 +853,50 @@ class _StartServiceBubble extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: const SelectableText(
-              _lanTransferStartCommand,
-              style: TextStyle(fontWeight: FontWeight.w900),
+            child: const SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: SelectableText(
+                _lanTransferStartCommand,
+                style: TextStyle(fontWeight: FontWeight.w900),
+              ),
             ),
           ),
           const SizedBox(height: 12),
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: [
-              FilledButton.icon(
+          if (isCompact) ...[
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
                 onPressed: onCopyStartCommand,
                 icon: const Icon(Icons.play_arrow),
                 label: const Text('复制启动命令'),
               ),
-              OutlinedButton.icon(
+            ),
+            const SizedBox(height: 8),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
                 onPressed: onRefresh,
                 icon: const Icon(Icons.refresh),
                 label: const Text('刷新状态'),
               ),
-            ],
-          ),
+            ),
+          ] else
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              children: [
+                FilledButton.icon(
+                  onPressed: onCopyStartCommand,
+                  icon: const Icon(Icons.play_arrow),
+                  label: const Text('复制启动命令'),
+                ),
+                OutlinedButton.icon(
+                  onPressed: onRefresh,
+                  icon: const Icon(Icons.refresh),
+                  label: const Text('刷新状态'),
+                ),
+              ],
+            ),
         ],
       ),
     );
@@ -903,6 +946,7 @@ class _ShareUrlBubble extends StatelessWidget {
 
     final primaryUrl = _preferredLanUrl(urls);
     final otherUrls = urls.where((url) => url != primaryUrl).toList();
+    final isCompact = _isCompactScreen(context);
     final qrSize = MediaQuery.sizeOf(context).width < 460 ? 184.0 : 220.0;
 
     return _ChatBubble(
@@ -917,7 +961,10 @@ class _ShareUrlBubble extends StatelessWidget {
         children: [
           SelectableText(
             primaryUrl,
-            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
+            style: TextStyle(
+              fontSize: isCompact ? 15 : 17,
+              fontWeight: FontWeight.w900,
+            ),
           ),
           const SizedBox(height: 14),
           Container(
@@ -1026,8 +1073,9 @@ class _FileMessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isCompact = _isCompactScreen(context);
     return _ChatBubble(
-      maxWidth: 520,
+      maxWidth: isCompact ? 420 : 520,
       trailing: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -1063,7 +1111,7 @@ class _FileMessageBubble extends StatelessWidget {
               child: Image.network(
                 file.downloadUrl,
                 width: double.infinity,
-                height: 210,
+                height: isCompact ? 160 : 210,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return const SizedBox.shrink();
@@ -1127,30 +1175,40 @@ class _ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bubble = ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: maxWidth),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 14),
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: child,
-      ),
-    );
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final reservedWidth = trailing == null ? 0.0 : 54.0;
+        final availableWidth = math.max(
+          180.0,
+          constraints.maxWidth - reservedWidth,
+        );
+        final effectiveMaxWidth = math.min(maxWidth, availableWidth);
+        final bubble = ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: effectiveMaxWidth),
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 14),
+            padding: EdgeInsets.all(_isCompactScreen(context) ? 14 : 16),
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: child,
+          ),
+        );
 
-    return Row(
-      mainAxisAlignment: outgoing
-          ? MainAxisAlignment.end
-          : MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        if (outgoing) const Spacer(),
-        Flexible(child: bubble),
-        if (trailing != null) ...[const SizedBox(width: 6), trailing!],
-        if (!outgoing) const Spacer(),
-      ],
+        return Row(
+          mainAxisAlignment: outgoing
+              ? MainAxisAlignment.end
+              : MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (outgoing) const Spacer(),
+            Flexible(child: bubble),
+            if (trailing != null) ...[const SizedBox(width: 6), trailing!],
+            if (!outgoing) const Spacer(),
+          ],
+        );
+      },
     );
   }
 }
@@ -1214,8 +1272,14 @@ class _ChatComposer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isCompact = _isCompactScreen(context);
     return Container(
-      padding: const EdgeInsets.fromLTRB(18, 12, 18, 16),
+      padding: EdgeInsets.fromLTRB(
+        isCompact ? 10 : 18,
+        12,
+        isCompact ? 10 : 18,
+        16,
+      ),
       color: const Color(0xffeee9fb),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -1231,7 +1295,7 @@ class _ChatComposer extends StatelessWidget {
                   )
                 : const Icon(Icons.note_add_outlined),
           ),
-          const SizedBox(width: 10),
+          SizedBox(width: isCompact ? 6 : 10),
           Expanded(
             child: TextField(
               controller: controller,
@@ -1259,10 +1323,10 @@ class _ChatComposer extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 10),
+          SizedBox(width: isCompact ? 6 : 10),
           SizedBox(
-            width: 56,
-            height: 56,
+            width: isCompact ? 48 : 56,
+            height: isCompact ? 48 : 56,
             child: IconButton.filled(
               tooltip: '发送文字',
               onPressed: enabled && !isSending ? onSend : null,
@@ -1280,7 +1344,7 @@ class _ChatComposer extends StatelessWidget {
                         color: Colors.white,
                       ),
                     )
-                  : const Icon(Icons.send, size: 30),
+                  : Icon(Icons.send, size: isCompact ? 26 : 30),
             ),
           ),
         ],
@@ -1363,4 +1427,8 @@ String _fileExtension(String filename) {
     return 'bin';
   }
   return filename.substring(dotIndex + 1).toLowerCase();
+}
+
+bool _isCompactScreen(BuildContext context) {
+  return MediaQuery.sizeOf(context).width < 560;
 }
