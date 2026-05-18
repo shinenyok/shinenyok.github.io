@@ -21,9 +21,9 @@ jobs:
           - os: ubuntu-latest
             executable: cotool-local-server
             asset_name: cotool-local-server-linux-x64.tar.gz
-          - os: macos-13
+          - os: macos-latest
             executable: cotool-local-server
-            asset_name: cotool-local-server-macos-x64.tar.gz
+            asset_name: cotool-local-server-macos-arm64.tar.gz
           - os: windows-latest
             executable: cotool-local-server.exe
             asset_name: cotool-local-server-windows-x64.zip

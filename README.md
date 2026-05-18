@@ -41,6 +41,6 @@ http://192.168.x.x:8787/share
 Run it manually from GitHub Actions for test artifacts, or create a tag to publish release assets:
 
 ```bash
-git tag local-server-v1.0.0
-git push origin local-server-v1.0.0
+git tag local-server-v1.0.1
+git push origin local-server-v1.0.1
 ```
