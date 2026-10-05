@@ -1,4 +1,5 @@
 import { SourceRuntime } from './runtime.mjs';
+import { requestText, normalizeToken, responseError } from './network.mjs';
 const $ = id => document.getElementById(id);
 const BASE = 'https://cotool-music-proxy.cotool-music-proxy.workers.dev';
 const ALLOWED = new Set(['search.kuwo.cn', 'songsearch.kugou.com', 'lxmusicapi.onrender.com']);
@@ -17,14 +18,13 @@ async function http(url, options = {}, signal) {
   if (options.formData) throw new Error('暂不支持 multipart 音源请求');
   if (options.form) { body = new URLSearchParams(options.form).toString(); headers.set('content-type', 'application/x-www-form-urlencoded'); }
   else if (body && typeof body !== 'string') { body = JSON.stringify(body); headers.set('content-type', 'application/json'); }
-  const response = await fetch(`${BASE}/__lx_proxy?url=${encodeURIComponent(target.href)}`, {
+  const { response, text } = await requestText(`${BASE}/__lx_proxy?url=${encodeURIComponent(target.href)}`, {
     method, headers: { Authorization: `Bearer ${token}`, 'X-LX-Proxy-Headers': JSON.stringify(Object.fromEntries(headers)) },
     body: method === 'POST' ? body : undefined,
-    signal: AbortSignal.any([AbortSignal.timeout(20000), ...(signal ? [signal] : [])]),
+    signal,
   });
-  const text = await response.text();
   let value; try { value = JSON.parse(text); } catch { value = text; }
-  if (!response.ok) throw new Error(`请求失败（${response.status}）：${value?.error || '音源服务不可用'}`);
+  if (!response.ok) throw new Error(responseError(response.status, value?.error));
   return { statusCode: response.status, statusMessage: response.statusText, headers: Object.fromEntries(response.headers),
     url: response.headers.get('x-lx-upstream-url') || url, ok: response.ok, body: value };
 }
@@ -40,13 +40,14 @@ $('tokenFile').onchange = async e => {
 };
 $('token').oninput = () => { connected = false; token = ''; runtime.dispose(); $('sourceLabel').textContent = '未连接'; };
 $('connect').onclick = () => action($('connect'), async () => {
-  runtime.dispose(); connected = false; token = $('token').value.trim();
+  runtime.dispose(); connected = false; $('sourceLabel').textContent = '未连接'; token = normalizeToken($('token').value);
   if (!token) throw new Error('请输入访问口令');
   status('正在连接…');
-  // An authenticated HEAD validates credentials, unlike the public /health route.
+  // Validate only this service and its token; no dependency on a music platform.
+  const { response, text } = await requestText(`${BASE}/session`, { headers: { Authorization: `Bearer ${token}` } });
+  if (!response.ok) throw new Error(responseError(response.status));
+  if (JSON.parse(text).ok !== true) throw new Error('服务返回异常，请稍后再试');
   connected = true;
-  try { await http('http://search.kuwo.cn/r.s', { method: 'HEAD' }); }
-  catch (error) { connected = false; throw error; }
   $('sourceLabel').textContent = '服务已连接'; status('服务已连接，请加载参考音源或导入脚本。');
 });
 async function loadSource(script, name) {
@@ -61,9 +62,9 @@ $('reference').onclick = () => action($('reference'), async () => {
   if (!connected) throw new Error('请先连接服务');
   status('正在从 GitHub 读取 music 目录中的参考音源…');
   const path = 'v260511/第一批次/HUIBQ音源.js'.split('/').map(encodeURIComponent).join('/');
-  const response = await fetch(`https://api.github.com/repos/guoyue2010/lxmusic-/contents/${path}?ref=main`, { signal: AbortSignal.timeout(20000) });
+  const { response, text } = await requestText(`https://api.github.com/repos/guoyue2010/lxmusic-/contents/${path}?ref=main`);
   if (!response.ok) throw new Error('参考音源下载失败，请导入本地 .js 文件');
-  const data = await response.json();
+  const data = JSON.parse(text);
   if (data.size > 1024 * 1024 || data.encoding !== 'base64') throw new Error('音源文件格式不支持');
   const script = new TextDecoder().decode(Uint8Array.from(atob(data.content.replace(/\s/g, '')), c => c.charCodeAt(0)));
   await loadSource(script, 'Huibq 参考音源');

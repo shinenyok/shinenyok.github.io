@@ -2,9 +2,10 @@
 <html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><title>听一会儿</title><link rel="stylesheet" href="style.css"></head>
 <body><header><div><small>留一点时间给自己</small><h1>听一会儿 <span>♪</span></h1></div><button id="close" aria-label="收起音乐面板">×</button></header>
 <main><details id="settings" open><summary>连接与音源 <span id="sourceLabel">未连接</span></summary>
-<label>访问口令<input id="token" type="password" autocomplete="off" placeholder="仅保留在当前页面"></label>
+<label>访问口令<input id="token" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="粘贴完整 token，仅保留在当前页面"></label>
 <label class="file">或导入本机口令文件<input id="tokenFile" type="file" accept=".vars,.txt"></label>
-<button id="connect">连接服务</button><hr>
+<button id="connect">连接服务</button>
+<a href="https://cotool-music-proxy.cotool-music-proxy.workers.dev/health" target="_blank" rel="noopener noreferrer" class="hint">打开服务检测页面</a><hr>
 <p class="hint">首次使用加载参考音源，或导入你的 LX 音源脚本。目前先支持酷我搜索和播放地址解析。</p>
 <button id="reference">加载 music 参考音源</button>
 <label class="file">导入音源 .js<input id="sourceFile" type="file" accept=".js,text/javascript"></label>

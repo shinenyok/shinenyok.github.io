@@ -4,6 +4,12 @@ const MAX_RESPONSE = 2 * 1024 * 1024;
 const METHODS = ['GET', 'HEAD', 'POST'];
 const REQUEST_HEADERS = new Set(['accept', 'content-type', 'user-agent', 'referer', 'origin', 'x-request-key']);
 const list = value => (value || '').split(',').map(v => v.trim()).filter(Boolean);
+function accessTokens(env) {
+  let extra = [];
+  try { extra = JSON.parse(env.PROXY_TOKENS || '[]'); } catch {}
+  if (!Array.isArray(extra)) extra = [];
+  return [env.PROXY_TOKEN, ...extra].filter(value => typeof value === 'string' && value.length > 0);
+}
 class ProxyError extends Error {
   constructor(status, message) { super(message); this.status = status; }
 }
@@ -49,9 +55,9 @@ export function createWorker(upstreamFetch = fetch) {
       };
       const json = (status, data) => Response.json(data, { status, headers: cors });
       if (url.pathname === '/health' && request.method === 'GET') {
-        return json(200, { ok: true, configured: Boolean(env.PROXY_TOKEN), mode: 'metadata-only' });
+        return json(200, { ok: true, configured: accessTokens(env).length > 0, mode: 'metadata-only' });
       }
-      if (url.pathname !== '/__lx_proxy') return json(404, { error: 'Not found' });
+      if (!['/__lx_proxy', '/session'].includes(url.pathname)) return json(404, { error: 'Not found' });
       if (origin && !allowed) return json(403, { error: 'Origin not allowed' });
       if (request.method === 'OPTIONS') {
         if (!allowed || !METHODS.includes(request.headers.get('access-control-request-method'))) {
@@ -60,9 +66,15 @@ export function createWorker(upstreamFetch = fetch) {
         return new Response(null, { status: 204, headers: cors });
       }
       // CORS is not authentication. Fail closed until a secret is configured.
-      if (!env.PROXY_TOKEN) return json(503, { error: 'Proxy token not configured' });
-      if (request.headers.get('authorization') !== `Bearer ${env.PROXY_TOKEN}`) {
+      const tokens = accessTokens(env);
+      if (!tokens.length) return json(503, { error: 'Proxy token not configured' });
+      if (!tokens.some(token => request.headers.get('authorization') === `Bearer ${token}`)) {
         return json(401, { error: 'Authentication required' });
+      }
+      if (url.pathname === '/session') {
+        return request.method === 'GET'
+          ? json(200, { ok: true })
+          : json(405, { error: 'Method not allowed' });
       }
       if (!METHODS.includes(request.method)) return json(405, { error: 'Method not allowed' });
       let timer;

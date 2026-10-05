@@ -73,3 +73,29 @@ test('HEAD/204 responses have no body and preserve status', async () => {
   assert.equal(response.status, 204);
   assert.equal(await response.text(), '');
 });
+
+test('additional tokens work alongside original; malformed lists never open access', async () => {
+  const worker = createWorker(async () => Response.json({ ok: true }));
+  const multi = { ...env, PROXY_TOKENS: JSON.stringify(['extra-one', 'extra-two']) };
+  for (const token of ['test-only', 'extra-one', 'extra-two']) {
+    assert.equal((await worker.fetch(request(undefined, { headers: { authorization: `Bearer ${token}` } }), multi)).status, 200);
+  }
+  assert.equal((await worker.fetch(request(undefined, { headers: { authorization: 'Bearer wrong' } }), multi)).status, 401);
+  for (const value of ['invalid', '{}', '[null, "", 123]']) {
+    const config = { ...env, PROXY_TOKEN: '', PROXY_TOKENS: value };
+    assert.equal((await worker.fetch(request(), config)).status, 503);
+  }
+  const onlyExtra = { ...multi, PROXY_TOKEN: '' };
+  assert.equal((await worker.fetch(request(undefined, { headers: { authorization: 'Bearer extra-one' } }), onlyExtra)).status, 200);
+});
+
+test('session authenticates without contacting music upstream and supports CORS',async()=>{
+ const worker=createWorker(()=>assert.fail('Session must not fetch upstream'));
+ const req=(method='GET',token='test-only')=>new Request('https://proxy.example/session',{method,headers:{origin:'https://www.shineyoki.top',authorization:`Bearer ${token}`,'access-control-request-method':'GET'}});
+ const response=await worker.fetch(req(),env);
+ assert.equal(response.status,200);assert.deepEqual(await response.json(),{ok:true});
+ assert.equal(response.headers.get('access-control-allow-origin'),'https://www.shineyoki.top');
+ assert.equal((await worker.fetch(req('GET','wrong'),env)).status,401);
+ assert.equal((await worker.fetch(req('OPTIONS',''),env)).status,204);
+ assert.equal((await worker.fetch(req('POST'),env)).status,405);
+});
