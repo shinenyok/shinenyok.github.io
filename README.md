@@ -6,6 +6,13 @@ Flutter web toolbox for app icons, JSON-to-Dart models, document conversion, and
 
 The site is deployed to GitHub Pages by `.github/workflows/deploy-pages.yml`.
 
+## Music Proxy Trial
+
+The music panel is loaded lazily from `web/music` using the small ♪ button at
+the bottom right. Search and source requests use the authenticated Cloudflare
+Worker in [`services/music-proxy`](services/music-proxy/README.md); audio plays
+directly over HTTPS. See that guide for connection and compatibility details.
+
 ## Local Server
 
 Some features need a local helper service, including LAN transfer and enhanced document conversion.
