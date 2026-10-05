@@ -41,15 +41,20 @@ test('unsupported crypto fails explicitly rather than returning corrupt data',as
 });
 
 test('playback rejects insecure or invalid source output',async()=>{
- for(const url of ['http://audio.example/a.mp3','javascript:alert(1)','not-url','https://user:pass@audio.example/a.mp3']){
+ for(const url of ['javascript:alert(1)','not-url','https://user:pass@audio.example/a.mp3']){
   const runtime=new SourceRuntime(()=>{});runtime.capabilities={kw:{}};
   runtime.wait=async()=>url;runtime.send=()=>{};
   await assert.rejects(()=>runtime.musicUrl({},'128k'));
  }
 });
 
-test('only the verified Kuwo media host is upgraded to HTTPS',async()=>{
+test('HTTP media addresses from any CDN upgrade without changing signed paths or queries',async()=>{
  const runtime=new SourceRuntime(()=>{});runtime.capabilities={kw:{}};
- runtime.wait=async()=> 'http://bd-er.kuwo.cn/path/song.mp3?key=example';runtime.send=()=>{};
- assert.equal(await runtime.musicUrl({},'128k'),'https://bd-er.kuwo.cn/path/song.mp3?key=example');
+ runtime.send=()=>{};
+ for (const host of ['bd-er.kuwo.cn','other-cdn.example']) {
+  runtime.wait=async()=> `http://${host}/path/a%20song.mp3?key=a%2Fb&expires=123`;
+  assert.equal(await runtime.musicUrl({},'128k'),`https://${host}/path/a%20song.mp3?key=a%2Fb&expires=123`);
+ }
+ runtime.wait=async()=> 'https://audio.example/a.mp3?sig=abc';
+ assert.equal(await runtime.musicUrl({},'128k'),'https://audio.example/a.mp3?sig=abc');
 });

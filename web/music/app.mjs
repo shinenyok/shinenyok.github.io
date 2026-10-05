@@ -99,7 +99,7 @@ $('search').onsubmit = e => {
         audio.src = url; $('now').textContent = `${title.textContent} · ${artist.textContent}`;
         try { await audio.play(); status('正在播放'); } catch (error) {
           if (error.name === 'NotAllowedError') status('地址已解析，点击下方播放键开始播放。');
-          else throw new Error('播放失败：音频地址可能失效或受浏览器限制');
+          else throw new Error('播放失败：音频服务器可能不支持 HTTPS，或地址已失效');
         }
       });
       $('results').append(button);
@@ -107,7 +107,7 @@ $('search').onsubmit = e => {
     status(body.abslist.length ? `${body.abslist.length} 首结果 · 点击歌曲播放` : '没有找到歌曲，换个关键词试试。');
   });
 };
-audio.addEventListener('error', () => status('音频加载失败：地址可能失效、限制访问或格式不受支持。', true));
+audio.addEventListener('error', () => status('音频加载失败：服务器可能不支持 HTTPS、限制访问，或地址已失效。', true));
 audio.addEventListener('playing', () => status('正在播放'));
 audio.addEventListener('pause', () => { if (audio.src && !audio.ended) status('已暂停'); });
 audio.addEventListener('ended', () => status('播放结束，选一首继续听。'));

@@ -121,9 +121,13 @@ export class SourceRuntime {
     this.send({ type: 'action', id, data: { source: 'kw', action: 'musicUrl', info: { type: quality, musicInfo: track } } });
     const url = await result;
     let parsed; try { parsed = new URL(url); } catch { throw new Error('音源没有返回有效播放地址'); }
-    // This specific host was verified to serve the same media path over TLS.
-    if (parsed.protocol === 'http:' && parsed.hostname === 'bd-er.kuwo.cn') parsed.protocol = 'https:';
-    if (parsed.protocol !== 'https:' || parsed.username || parsed.password) throw new Error('音源返回的地址不是可直接播放的 HTTPS 地址');
+    if (!['http:', 'https:'].includes(parsed.protocol) || parsed.username || parsed.password) {
+      throw new Error('音源返回了无效的音频地址');
+    }
+    // HTTPS pages cannot reliably play mixed-content audio. Try the same URL
+    // over TLS for every source/CDN, preserving the path and signed query.
+    // Servers without TLS fail through the player's media error handler.
+    if (parsed.protocol === 'http:') parsed.protocol = 'https:';
     return parsed.href;
   }
   dispose() {
