@@ -1,7 +1,7 @@
 import { SourceRuntime } from './runtime.mjs';
 import { requestText, normalizeToken, responseError } from './network.mjs';
 const $ = id => document.getElementById(id);
-const BASE = 'https://cotool-music-proxy.cotool-music-proxy.workers.dev';
+const BASE = 'https://api.shineyoki.top';
 const ALLOWED = new Set(['search.kuwo.cn', 'songsearch.kugou.com', 'lxmusicapi.onrender.com']);
 let token = '', connected = false, playSequence = 0;
 const audio = $('audio');

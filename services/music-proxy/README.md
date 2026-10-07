@@ -53,6 +53,19 @@ unset PROXY_TOKEN
 
 不需要迁移现有域名或 DNS。不启用付费计划。可以执行 `npx wrangler delete` 删除这个试验 Worker。
 
+## 保留现有 DNS：Render + 自有子域名
+
+仓库根目录的 `render.yaml` 将同一个代理逻辑部署为 Render Web Service，服务端入口为 `src/server.mjs`。Render 免费服务支持自定义域名和 TLS，但空闲 15 分钟后会休眠，首个请求唤醒可能需要约一分钟；免费额度和限制以 Render 当前官方说明为准。
+
+1. 在 Render Dashboard 创建 Blueprint，连接此 GitHub 仓库并选择仓库根目录的 `render.yaml`。
+2. 创建服务时，为 `PROXY_TOKEN` 填入已有的代理口令；该值只填写在 Render 环境变量设置中，不要放进 Git 或网页。
+3. 等部署成功后，Render 会给出 `*.onrender.com` 服务地址。在该服务的 Settings → Custom Domains 中添加 `api.shineyoki.top`。
+4. 按 Render 页面显示的目标，在当前 DNS 服务商添加一条 `CNAME`：主机记录 `api`，记录值使用 Render 页面给出的服务目标。等待 Render 显示 TLS 已生效。
+5. 打开 `https://api.shineyoki.top/health`，确认 JSON 中 `configured` 为 `true`。
+6. 网页代码使用 `https://api.shineyoki.top`。只有确认自有域名健康检查可用后，才推送这一网页地址切换。
+
+上述操作只新增 `api.shineyoki.top` 子域记录，不需要更改域名 NS 或现有网站记录。不要猜测 CNAME 目标：以 Render 控制台给此服务显示的目标为准。
+
 ## 边界与后续
 
 - 接口兼容现有代理的路径 `/__lx_proxy?url=...` 和 `X-LX-Proxy-Headers`，新增 `Authorization: Bearer ...`。
