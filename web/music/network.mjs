@@ -14,7 +14,7 @@ export async function requestText(url, options = {}, timeoutMs = 20000, fetcher 
   } catch (error) {
     if (timedOut) throw new Error('连接超时：请检查手机网络是否能打开服务检测页面');
     if (controller.signal.aborted) throw new Error('请求已取消');
-    if (error instanceof TypeError) throw new Error('无法访问服务：可能是当前网络无法连接服务域名，或浏览器阻止了请求');
+    if (error instanceof TypeError) throw new Error(`浏览器无法连接音乐服务（当前网页：${location.origin}）。请先打开下方“服务检测页面”：若也打不开，通常是当前网络拦截了 Cloudflare 域名；若检测页显示 JSON，再检查网站地址与跨域设置。`);
     throw error;
   } finally {
     clearTimeout(timer);
