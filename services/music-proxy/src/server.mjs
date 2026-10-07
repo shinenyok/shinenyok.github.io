@@ -4,10 +4,11 @@ import { createWorker } from './worker.mjs';
 const port = Number(process.env.PORT) || 10000;
 const allowedOrigins = process.env.ALLOWED_ORIGINS || 'https://www.shineyoki.top,https://shineyoki.top';
 const allowedHosts = process.env.ALLOWED_HOSTS || 'search.kuwo.cn,songsearch.kugou.com,lxmusicapi.onrender.com';
+const proxyToken = (process.env.PROXY_TOKEN || '').trim().replace(/^PROXY_TOKEN\s*=\s*/, '');
 const env = {
   ALLOWED_ORIGINS: allowedOrigins,
   ALLOWED_HOSTS: allowedHosts,
-  PROXY_TOKEN: process.env.PROXY_TOKEN || '',
+  PROXY_TOKEN: proxyToken,
   PROXY_TOKENS: process.env.PROXY_TOKENS || '[]',
   UPSTREAM_TIMEOUT_MS: process.env.UPSTREAM_TIMEOUT_MS || '13000',
 };
