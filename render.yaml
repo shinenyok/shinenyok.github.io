@@ -11,7 +11,7 @@ services:
       - key: ALLOWED_ORIGINS
         value: https://www.shineyoki.top,https://shineyoki.top
       - key: ALLOWED_HOSTS
-        value: search.kuwo.cn,songsearch.kugou.com,lxmusicapi.onrender.com
+        value: search.kuwo.cn,songsearch.kugou.com,mobilecdnbj.kugou.com,u.y.qq.com,lxmusicapi.onrender.com
       - key: UPSTREAM_TIMEOUT_MS
         value: "13000"
       - key: PROXY_TOKEN

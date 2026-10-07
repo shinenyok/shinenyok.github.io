@@ -6,13 +6,13 @@
 <label class="file">或导入本机口令文件<input id="tokenFile" type="file" accept=".vars,.txt"></label>
 <button id="connect">连接服务</button>
 <a href="https://api.shineyoki.top/health" target="_blank" rel="noopener noreferrer" class="hint">打开服务检测页面</a><hr>
-<p class="hint">首次使用加载参考音源，或导入你的 LX 音源脚本。目前先支持酷我搜索和播放地址解析。</p>
+<p class="hint">支持酷我搜索和播放地址解析；随机热歌优先取 QQ 榜单，失败时回退酷狗榜单。</p>
 <button id="reference">加载 music 参考音源</button>
 <label class="file">导入音源 .js<input id="sourceFile" type="file" accept=".js,text/javascript"></label>
 <p class="hint">音源仅本次有效，不会上传保存。当前为兼容试用版，部分音源暂不可用。</p>
 </details>
-<form id="search"><label class="sr-only" for="keyword">歌曲或歌手</label><input id="keyword" placeholder="搜一首歌，或一个歌手" required maxlength="100"><button>搜索</button></form>
+<div class="search-actions"><button id="random" type="button">随机热歌</button><form id="search"><label class="sr-only" for="keyword">歌曲或歌手</label><input id="keyword" placeholder="搜一首歌，或一个歌手" required maxlength="100"><button>搜索</button></form></div>
 <p id="status" role="status" aria-live="polite">连接服务，选一个音源，然后开始听歌。</p>
 <div id="results" aria-label="搜索结果"></div>
-</main><footer><div id="now">还没有正在播放的歌曲</div><audio id="audio" controls preload="none"></audio><p class="hint">收起面板仍可播放 · 刷新后需重新连接</p></footer>
+</main><footer><div id="now">还没有正在播放的歌曲</div><div class="player-actions"><button id="previous" type="button" disabled>上一首</button><button id="next" type="button" disabled>下一首</button></div><audio id="audio" controls preload="none"></audio><p class="hint">收起面板仍可播放 · 刷新后需重新连接</p></footer>
 <script type="module" src="app.mjs"></script></body></html>

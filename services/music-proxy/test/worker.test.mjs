@@ -26,6 +26,19 @@ test('authenticated POST preserves body and selected headers, never forwards pro
   assert.equal(seen.redirect, 'manual');
 });
 
+test('QQ and Kugou chart hosts are available only when explicitly allowlisted', async () => {
+  const requested = [];
+  const worker = createWorker(async url => { requested.push(new URL(url).hostname); return Response.json({ ok: true }); });
+  const allowlisted = { ...env, ALLOWED_HOSTS: 'u.y.qq.com,mobilecdnbj.kugou.com' };
+  for (const host of ['u.y.qq.com', 'mobilecdnbj.kugou.com']) {
+    const response = await worker.fetch(request(`https://${host}/api/chart`), allowlisted);
+    assert.equal(response.status, 200);
+  }
+  assert.deepEqual(requested, ['u.y.qq.com', 'mobilecdnbj.kugou.com']);
+  assert.equal((await worker.fetch(request('https://u.y.qq.com.evil.example/'), allowlisted)).status, 403);
+  assert.equal((await worker.fetch(request('https://u.y.qq.com/'), env)).status, 403);
+});
+
 test('rejects unauthenticated, unknown origins, nonallowlisted targets and forged forwarded headers before fetch', async () => {
   const worker = createWorker(() => { assert.fail('Must not contact upstream'); });
   for (const [req, config, expected] of [

@@ -69,7 +69,7 @@ unset PROXY_TOKEN
 ## 边界与后续
 
 - 接口兼容现有代理的路径 `/__lx_proxy?url=...` 和 `X-LX-Proxy-Headers`，新增 `Authorization: Bearer ...`。
-- `ALLOWED_HOSTS` 只包含已检查的两个搜索域名和 `lxmusicapi.onrender.com`，精确匹配；新增音源需检查域名后修改配置。不跟随重定向。
+- `ALLOWED_HOSTS` 对目标主机做精确匹配，不跟随重定向；音乐面板额外使用 `u.y.qq.com` 读取 QQ 热歌榜，QQ 榜单失败时用 `mobilecdnbj.kugou.com` 读取酷狗 TOP500。榜单曲目再经酷我搜索匹配到现有播放解析。
 - CORS 限制网站来源，口令单独鉴权。隐藏入口本身不是权限控制。未来网页可由本人临时输入口令，不能在静态资源内硬编码。
 - 请求体最多 64 KiB，响应最多 2 MiB，上游超时默认 13 秒。禁用音视频转发。
 - 已实现最小 LX 浏览器运行时：初始化、request 事件、HTTP 回调、取消、基础 buffer。加密、二进制、multipart、其他音乐平台暂未适配；不会假装兼容所有音源。

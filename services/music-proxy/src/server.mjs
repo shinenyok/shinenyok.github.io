@@ -3,7 +3,7 @@ import { createWorker } from './worker.mjs';
 
 const port = Number(process.env.PORT) || 10000;
 const allowedOrigins = process.env.ALLOWED_ORIGINS || 'https://www.shineyoki.top,https://shineyoki.top';
-const allowedHosts = process.env.ALLOWED_HOSTS || 'search.kuwo.cn,songsearch.kugou.com,lxmusicapi.onrender.com';
+const allowedHosts = process.env.ALLOWED_HOSTS || 'search.kuwo.cn,songsearch.kugou.com,mobilecdnbj.kugou.com,u.y.qq.com,lxmusicapi.onrender.com';
 const proxyToken = (process.env.PROXY_TOKEN || '').trim().replace(/^PROXY_TOKEN\s*=\s*/, '');
 const env = {
   ALLOWED_ORIGINS: allowedOrigins,
