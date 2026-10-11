@@ -3,10 +3,12 @@ import assert from 'node:assert/strict';
 import { shuffle, moveIndex, parseQQHotChart, parseKugouHotChart, chartPlayScore } from '../../../web/music/charts.mjs';
 
 test('QQ hot chart response normalizes songs and artists', () => {
-  assert.deepEqual(parseQQHotChart({ toplist: { data: { songInfoList: [
+  const expected = [
     { name: '歌名', singer: [{ name: '甲' }, { name: '乙' }] },
-    { name: '', singer: [{ name: '无标题' }] },
-  ] } } }), [{ title: '歌名', artist: '甲、乙', source: 'QQ 音乐热歌榜' }]);
+  ];
+  const normalized = [{ title: '歌名', artist: '甲、乙', source: 'QQ 音乐热歌榜' }];
+  assert.deepEqual(parseQQHotChart({ toplist: { data: { songInfoList: [...expected, { name: '', singer: [{ name: '无标题' }] }] } } }), normalized);
+  assert.deepEqual(parseQQHotChart({ toplist: { data: { data: { songInfoList: expected } } } }), normalized);
 });
 
 test('Kugou chart response normalizes tracks for fallback playback', () => {

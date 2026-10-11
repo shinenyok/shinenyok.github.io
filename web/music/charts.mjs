@@ -13,7 +13,9 @@ export function moveIndex(index, direction, length) {
 }
 
 export function parseQQHotChart(body) {
-  const songs = body?.toplist?.data?.songInfoList;
+  // QQ's GetDetail payload is wrapped one level deeper than the legacy shape:
+  // toplist.data.data.songInfoList. Accept both so the app tolerates either API.
+  const songs = body?.toplist?.data?.data?.songInfoList || body?.toplist?.data?.songInfoList;
   if (!Array.isArray(songs)) return [];
   return songs.map(song => ({
     title: String(song?.name || song?.title || '').trim(),
