@@ -34,7 +34,11 @@ export function normalizeToken(input) {
 
 export function responseError(status, detail) {
   if (status === 401) return '口令不正确或已失效，请重新复制完整 token';
-  if (status === 403) return '当前网站地址或音源未获允许，请从 https://www.shineyoki.top 打开';
+  if (status === 403) {
+    if (detail === 'Origin not allowed') return '当前网页来源未获允许，请从 https://www.shineyoki.top 打开';
+    if (detail === 'Target not allowed') return '该音源域名未加入代理允许列表，请检查 Render 的 ALLOWED_HOSTS 设置';
+    return detail ? `音乐服务拒绝了请求（403）：${detail}` : '请求被拒绝（403），请检查网站来源和音源允许列表';
+  }
   if (status === 503) return '服务暂未配置完成，请稍后再试';
   return `请求失败（${status}）：${detail || '服务暂时不可用'}`;
 }

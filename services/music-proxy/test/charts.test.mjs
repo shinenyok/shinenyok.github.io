@@ -27,5 +27,6 @@ test('shuffle copies and permutes; queue navigation wraps in both directions', (
 test('chart playback matching scores title agreement and artist agreement', () => {
   assert.equal(chartPlayScore({ title: 'A Song', artist: 'A Singer' }, { SONGNAME: 'A Song', ARTIST: 'A Singer' }), 15);
   assert.equal(chartPlayScore({ title: 'A Song', artist: 'A Singer' }, { SONGNAME: 'A Song', ARTIST: 'Other' }), 10);
+  assert.equal(chartPlayScore({ title: 'A Song', artist: '甲、乙' }, { SONGNAME: 'A Song', ARTIST: '乙' }), 15);
   assert.equal(chartPlayScore({ title: 'A Song', artist: 'A Singer' }, { SONGNAME: 'Other', ARTIST: 'A Singer' }), 0);
 });

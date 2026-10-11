@@ -43,5 +43,10 @@ export function chartPlayScore(chartTrack, searchTrack) {
   const artist = normalize(chartTrack.artist);
   const foundArtist = normalize(searchTrack.ARTIST);
   if (!title || !foundTitle || !(title === foundTitle || title.includes(foundTitle) || foundTitle.includes(title))) return 0;
-  return 10 + (artist && foundArtist && (artist.includes(foundArtist) || foundArtist.includes(artist)) ? 5 : 0);
+  // Chart artists are often joined with punctuation while Kuwo uses spaces or
+  // localized separators. Compare individual names and let an exact title win.
+  const artists = String(chartTrack.artist || '').split(/[、，,;；/\\&|]+/).map(normalize).filter(Boolean);
+  const artistMatch = artists.some(name => foundArtist.includes(name) || name.includes(foundArtist)) ||
+    (artist && foundArtist && (artist.includes(foundArtist) || foundArtist.includes(artist)));
+  return 10 + (artistMatch ? 5 : 0);
 }

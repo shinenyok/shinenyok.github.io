@@ -25,7 +25,14 @@ async function http(url, options = {}, signal) {
     signal,
   });
   let value; try { value = JSON.parse(text); } catch { value = text; }
-  if (!response.ok) throw new Error(responseError(response.status, value?.error));
+  if (!response.ok) {
+    // The proxy relays upstream HTTP statuses. A 403 with this header is the
+    // music provider rejecting the request, not our site's CORS/host policy.
+    if (response.headers.has('x-lx-upstream-url')) {
+      throw new Error(`${target.hostname} 音源拒绝了请求（HTTP ${response.status}）`);
+    }
+    throw new Error(responseError(response.status, value?.error));
+  }
   return { statusCode: response.status, statusMessage: response.statusText, headers: Object.fromEntries(response.headers),
     url: response.headers.get('x-lx-upstream-url') || url, ok: response.ok, body: value };
 }
@@ -60,11 +67,15 @@ function searchUrl(keyword) {
   return target.href;
 }
 async function matchChartTrack(track) {
-  const { body } = await http(searchUrl(`${track.title} ${track.artist}`));
-  const candidates = Array.isArray(body.abslist) ? body.abslist : [];
-  const best = candidates.map(item => ({ item, score: chartPlayScore(track, item) })).sort((a, b) => b.score - a.score)[0];
-  if (!best?.score || !best.item.MUSICRID) throw new Error(`酷我暂未找到「${track.title}」的可播放版本`);
-  return best.item;
+  // Try title-only first: chart artist strings often contain several singers
+  // or featured-artist annotations that make combined search queries weaker.
+  for (const keyword of [track.title, `${track.title} ${track.artist}`]) {
+    const { body } = await http(searchUrl(keyword));
+    const candidates = Array.isArray(body.abslist) ? body.abslist : [];
+    const best = candidates.map(item => ({ item, score: chartPlayScore(track, item) })).sort((a, b) => b.score - a.score)[0];
+    if (best?.score && best.item.MUSICRID) return best.item;
+  }
+  throw new Error(`酷我暂未找到「${track.title}」的可播放版本`);
 }
 async function playQueueIndex(index) {
   if (!queue.length) return false;
@@ -94,14 +105,17 @@ function moveQueue(direction) {
 }
 async function tryRandomQueue(tracks, source) {
   queue = shuffle(tracks); queueIndex = -1; updatePlayerButtons();
-  const attempts = Math.min(queue.length, 5);
+  const attempts = Math.min(queue.length, 12);
+  let lastError;
   for (let i = 0; i < attempts; i++) {
     const index = moveIndex(queueIndex, 1, queue.length);
     if (await playQueueIndex(index)) {
       status(`正在随机播放${source}（${trackTitle(queue[index])}）`);
       return true;
     }
+    lastError = $('status').textContent;
   }
+  if (lastError) status(`${source}尝试 ${attempts} 首均未能播放。最近失败：${lastError}`, true);
   return false;
 }
 $('close').onclick = () => parent.postMessage('music:close', location.origin);

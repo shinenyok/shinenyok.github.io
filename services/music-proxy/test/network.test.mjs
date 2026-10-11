@@ -23,5 +23,8 @@ test('mobile token copy formats normalize; network errors do not suggest wrong c
  assert.equal(normalizeToken('PROXY_TOKEN= abcd\nef12 '),'abcdef12');
  assert.equal(normalizeToken('Bearer abcdef12'),'abcdef12');
  assert.match(responseError(401),/口令不正确/);
+ assert.match(responseError(403, 'Origin not allowed'),/网页来源未获允许/);
+ assert.match(responseError(403, 'Target not allowed'),/ALLOWED_HOSTS/);
+ assert.match(responseError(403, 'provider says no'),/音乐服务拒绝了请求/);
  await assert.rejects(()=>requestText('https://example.test',{},100,async()=>{throw new TypeError('Failed to fetch');}),/当前网络无法连接/);
 });
